@@ -8,23 +8,11 @@
     <loc>https://hzw9527.github.io/posts/papermod/papermod-features/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hzw9527.github.io/posts/papermod/papermod-faq/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hzw9527.github.io/posts/papermod/papermod-icons/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hzw9527.github.io/posts/papermod/papermod-variables/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hzw9527.github.io/tags/git/</loc>
-    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
-  </url><url>
-    <loc>https://hzw9527.github.io/tags/gitflow/</loc>
-    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
+    <loc>https://hzw9527.github.io/posts/git/git_merge/</loc>
+    <lastmod>2022-05-17T21:48:17+08:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/</loc>
-    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
+    <lastmod>2022-05-17T21:48:17+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -42,7 +30,7 @@
                 />
   </url><url>
     <loc>https://hzw9527.github.io/posts/</loc>
-    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
+    <lastmod>2022-05-17T21:48:17+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -59,11 +47,23 @@
                 href="https://hzw9527.github.io/posts/"
                 />
   </url><url>
-    <loc>https://hzw9527.github.io/tags/</loc>
-    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
+    <loc>https://hzw9527.github.io/categories/</loc>
+    <lastmod>2022-05-17T21:36:42+08:00</lastmod>
   </url><url>
-    <loc>https://hzw9527.github.io/posts/git/gitflow/</loc>
-    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
+    <loc>https://hzw9527.github.io/tags/git/</loc>
+    <lastmod>2022-05-17T21:36:42+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/categories/git/</loc>
+    <lastmod>2022-05-17T21:36:42+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/tags/git_flow/</loc>
+    <lastmod>2022-05-17T21:36:42+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/posts/git/git_flow/</loc>
+    <lastmod>2022-05-17T21:36:42+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/tags/</loc>
+    <lastmod>2022-05-17T21:36:42+08:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/tags/papermod/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
@@ -76,9 +76,6 @@
   </url><url>
     <loc>https://hzw9527.github.io/series/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hzw9527.github.io/categories/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/tags/css/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>

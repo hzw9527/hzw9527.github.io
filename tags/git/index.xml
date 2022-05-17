@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>git on PaperMod</title>
+    <link>https://hzw9527.github.io/tags/git/</link>
+    <description>Recent content in git on PaperMod</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 17 May 2022 21:36:42 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git_flow</title>
+      <link>https://hzw9527.github.io/posts/git/git_flow/</link>
+      <pubDate>Tue, 17 May 2022 21:36:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/git/git_flow/</guid>
+      <description>工作流 git flow 1 git flow 的 5 个分支情况 2 git flow 的工作流程 2.1 场景如下  当前版本为 0.9。0 需要开发一个功能，使程序打印标准输出 hello world 字符串。 在开发阶段，线上代码有 Bug 需要紧急修复  2.2 1 创建一个常住分支： develop
+$ git checkout -b develop master 2 基于 develop 分支创建一个新的功能分支：feature/print-hello-world
+$ git checkout -b feature/print-hello-world develop 3 feature/print-hello-world 分支中，在 main.go 文件中添加一行代码 fmt.Println(&amp;quot;Hello&amp;quot;)，添加后的代码如下
+package main import &amp;#34;fmt&amp;#34; func main() { fmt.Println(&amp;#34;callmainfunction&amp;#34;) fmt.Println(&amp;#34;Hello&amp;#34;) } 4 紧急修复 bug，我们正处在新功能的开发中（只完成了 fmt.Println(&amp;ldquo;Hello&amp;rdquo;)而非 fmt.Println(&amp;ldquo;Hello World&amp;rdquo;)）突然线上代码发现了一个 Bug，我们要立即停止手上的工作，修复线上的 Bug，步骤如下</description>
+    </item>
+    
+  </channel>
+</rss>
