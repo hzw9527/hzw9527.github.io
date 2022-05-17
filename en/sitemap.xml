@@ -17,14 +17,14 @@
     <loc>https://hzw9527.github.io/posts/papermod/papermod-variables/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hzw9527.github.io/tags/papermod/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+    <loc>https://hzw9527.github.io/tags/git/</loc>
+    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
   </url><url>
-    <loc>https://hzw9527.github.io/series/papermod/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+    <loc>https://hzw9527.github.io/tags/gitflow/</loc>
+    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -41,11 +41,8 @@
                 href="https://hzw9527.github.io/"
                 />
   </url><url>
-    <loc>https://hzw9527.github.io/posts/papermod/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://hzw9527.github.io/posts/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -62,10 +59,22 @@
                 href="https://hzw9527.github.io/posts/"
                 />
   </url><url>
-    <loc>https://hzw9527.github.io/series/</loc>
+    <loc>https://hzw9527.github.io/tags/</loc>
+    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/posts/git/gitflow/</loc>
+    <lastmod>2022-05-17T17:57:32+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/tags/papermod/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hzw9527.github.io/tags/</loc>
+    <loc>https://hzw9527.github.io/series/papermod/</loc>
+    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/posts/papermod/</loc>
+    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/series/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/categories/</loc>
