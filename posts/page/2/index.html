@@ -176,44 +176,79 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Math Typesetting
+    <h2>Git_merge
     </h2>
   </header>
   <div class="entry-content">
-    <p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.
-...</p>
+    <p>git merge 1 git merge 默认操作 创建 develop 分支 基于 develop 分支创建 feature/print-1 分支
+git checkout -b feature/print-1 develop 完成 feature/print-1 分支开发，有两个提交，当前视图如下
+切换到 develop 分支 merge feature/print-1 分支
+git merge feature/print-1 视图如下
+2 git merge –no-ff 基于 develop 分支创建了feature-print2 分支，完成两次提交 add3 add4 后切换到
+develop 分支，紧接着合并 feature-print2,
+git merge --no-ff feature/print-2 3 git merge –squash 基于 develop 分支创建了feature-print3 分支，完成两次提交 print3-1 print3-2 后切换到
+develop 分支，紧接着合并 feature-print3,
+git merge --squash feature/print-2 4 git merge 示意图 git merge 默认操作 git merge –no-ff git merge –squash </p>
   </div>
-  <footer class="entry-footer"><span title='2019-03-08 00:00:00 +0000 UTC'>March 8, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Hugo Authors</footer>
-  <a class="entry-link" aria-label="post link to Math Typesetting" href="https://hzw9527.github.io/posts/math-typesetting/"></a>
+  <footer class="entry-footer"><span title='2022-05-17 21:48:17 +0800 CST'>May 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Theme PaperMod</footer>
+  <a class="entry-link" aria-label="post link to Git_merge" href="https://hzw9527.github.io/posts/git/git_merge/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Emoji Support
+    <h2>Git_flow
     </h2>
   </header>
   <div class="entry-content">
-    <p>Emoji can be enabled in a Hugo project in a number of ways.
-...</p>
+    <p>工作流 git flow 1 git flow 的 5 个分支情况 2 git flow 的工作流程 2.1 场景如下  当前版本为 0.9。0 需要开发一个功能，使程序打印标准输出 hello world 字符串。 在开发阶段，线上代码有 Bug 需要紧急修复  2.2 1 创建一个常住分支： develop
+$ git checkout -b develop master 2 基于 develop 分支创建一个新的功能分支：feature/print-hello-world
+$ git checkout -b feature/print-hello-world develop 3 feature/print-hello-world 分支中，在 main.go 文件中添加一行代码 fmt.Println(&#34;Hello&#34;)，添加后的代码如下
+package main import &#34;fmt&#34; func main() { fmt.Println(&#34;callmainfunction&#34;) fmt.Println(&#34;Hello&#34;) } 4 紧急修复 bug，我们正处在新功能的开发中（只完成了 fmt.Println(“Hello”)而非 fmt.Println(“Hello World”)）突然线上代码发现了一个 Bug，我们要立即停止手上的工作，修复线上的 Bug，步骤如下...</p>
   </div>
-  <footer class="entry-footer"><span title='2019-03-05 00:00:00 +0000 UTC'>March 5, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Hugo Authors</footer>
-  <a class="entry-link" aria-label="post link to Emoji Support" href="https://hzw9527.github.io/posts/emoji-support/"></a>
+  <footer class="entry-footer"><span title='2022-05-17 21:36:42 +0800 CST'>May 17, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Theme PaperMod</footer>
+  <a class="entry-link" aria-label="post link to Git_flow" href="https://hzw9527.github.io/posts/git/git_flow/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>PaperMod
+    <h2>Markdown Syntax Guide
     </h2>
   </header>
   <div class="entry-content">
-    <p>Contains posts related to PaperMod</p>
+    <p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.
+...</p>
   </div>
-  <footer class="entry-footer"><span title='2021-01-20 00:00:00 +0000 UTC'>January 20, 2021</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Theme PaperMod</footer>
-  <a class="entry-link" aria-label="post link to PaperMod" href="https://hzw9527.github.io/posts/papermod/"></a>
+  <footer class="entry-footer"><span title='2019-03-11 00:00:00 +0000 UTC'>March 11, 2019</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Hugo Authors</footer>
+  <a class="entry-link" aria-label="post link to Markdown Syntax Guide" href="https://hzw9527.github.io/posts/markdown-syntax/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Rich Content
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer"><span title='2019-03-10 00:00:00 +0000 UTC'>March 10, 2019</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Hugo Authors</footer>
+  <a class="entry-link" aria-label="post link to Rich Content" href="https://hzw9527.github.io/posts/rich-content/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Placeholder Text
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Lorem est tota propiore conpellat pectoribus de pectora summo.
+...</p>
+  </div>
+  <a class="entry-link" aria-label="post link to Placeholder Text" href="https://hzw9527.github.io/posts/placeholder-text/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://hzw9527.github.io/posts/">« Prev</a>
+    <a class="next" href="https://hzw9527.github.io/posts/page/3/">Next »</a>
   </nav>
 </footer>
     </main>
