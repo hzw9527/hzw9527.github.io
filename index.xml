@@ -9,7 +9,7 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 06 Jun 2022 21:39:27 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jun 2022 23:02:46 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Installation | Update</title>
       <link>https://hzw9527.github.io/posts/papermod/papermod-installation/</link>
@@ -53,6 +53,24 @@
       
       <guid>https://hzw9527.github.io/posts/papermod/papermod-variables/</guid>
       <description>List of Front Matter variables used by PaperMod</description>
+    </item>
+    
+    <item>
+      <title>Go_test</title>
+      <link>https://hzw9527.github.io/posts/go/go_test/</link>
+      <pubDate>Mon, 13 Jun 2022 23:02:46 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_test/</guid>
+      <description>&lt;p&gt;如何编写单元测试和性能测试用例&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Yaml基本语法</title>
+      <link>https://hzw9527.github.io/posts/yaml/yaml/</link>
+      <pubDate>Mon, 13 Jun 2022 21:05:43 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/yaml/yaml/</guid>
+      <description>&lt;p&gt;主要讲解 yaml 的基本语法&lt;/p&gt;</description>
     </item>
     
     <item>
