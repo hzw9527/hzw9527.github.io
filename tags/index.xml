@@ -9,7 +9,25 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 13 Jun 2022 23:02:46 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Jun 2022 22:44:28 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>commit_specification</title>
+      <link>https://hzw9527.github.io/tags/commit_specification/</link>
+      <pubDate>Wed, 15 Jun 2022 22:44:28 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/tags/commit_specification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gitignore</title>
+      <link>https://hzw9527.github.io/tags/gitignore/</link>
+      <pubDate>Wed, 15 Jun 2022 22:28:25 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/tags/gitignore/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>测试</title>
       <link>https://hzw9527.github.io/tags/%E6%B5%8B%E8%AF%95/</link>
