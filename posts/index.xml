@@ -9,7 +9,16 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 15 Jun 2022 22:44:28 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Jun 2022 14:55:26 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker_wordpress</title>
+      <link>https://hzw9527.github.io/posts/docker/docker_wordpress/</link>
+      <pubDate>Sat, 25 Jun 2022 14:55:26 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/docker/docker_wordpress/</guid>
+      <description>&lt;p&gt;docker 搭建 wordpress&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Commit_specification</title>
       <link>https://hzw9527.github.io/posts/git/commit_specification/</link>
