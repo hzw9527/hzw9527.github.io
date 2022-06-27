@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Docker_wordpress | hzw</title>
-<meta name="keywords" content="wordpress">
+<meta name="keywords" content="docker">
 <meta name="description" content="docker 搭建 wordpress">
 <meta name="author" content="Theme PaperMod">
 <link rel="canonical" href="https://hzw9527.github.io/posts/docker/docker_wordpress/">
@@ -99,7 +99,7 @@
   "name": "Docker_wordpress",
   "description": "docker 搭建 wordpress\n",
   "keywords": [
-    "wordpress"
+    "docker"
   ],
   "articleBody": "docker 搭建 wordpress\n1 搭建 PHP 镜像 1.1 新建一个工作目录，并进入该目录 $ mkdir docker-demo \u0026\u0026 cd docker-demo 1.2 基于 php 的 image 文件新建一个容器，并且运行该容器 $ docker container run \\  --rm \\  -p:8000:80 \\  --name wordpress \\  --volume \"$PWD/\":/var/www/html \\  php:7.2-apache 参数解释\n --rm：停止运行后，自动删除容器文件。 -p: 将容器的80端口映射到主机的8000端口** --name wordpress：容器的名字叫做wordpress。 --volume \"$PWD/\":/var/www/html：将当前目录（$PWD）映射到容器的/var/www/html（Apache 对外访问的默认目录）。因此，当前目录的任何修改，都会反映到容器里面，进而被外部访问到  访问主机+端口 显示如下 Forbidden You don’t have permission to access this resource.\nApache/2.4.38 (Debian) Server at 42.192.0.127 Port 8000\n这是因为容器的 /var/www/html 目录（也就是本机的 docker-demo 目录）下面什么也没有，无法提供可以访问的内容。\n请在本机的 docker-demo 目录下面，添加一个最简单的 PHP 文件 index.php。\nphp phpinfo(); ?保存以后，浏览器再次访问 IP，应该就会看到熟悉的 phpinfo 页面了。 2 拷贝 WordPress 安装包 既然本地的 docker-demo 目录可以映射到容器里面，那么把 WordPress 安装包拷贝到 docker-demo 目录下，不就可以通过容器访问到 WordPress 的安装界面了吗？\n$ wget https://cn.wordpress.org/latest-zh_CN.tar.gz $ tar -xvf latest-zh_CN.tar.gz 解压以后，WordPress 的安装文件会在 docker-demo/wordpress 目录下。 这时候访问浏览器 http://ip:8000/wordpress 就可以看到如下界面 3 官方的 mysql 容器 WordPress 必须有数据库才能安装，所以必须新建 MySQL 容器。\n打开一个新的命令行窗口，执行下面的命令。\n$ docker container run \\  -d \\  --rm \\  --name wordpressdb \\  --env MYSQL_ROOT_PASSWORD=123456 \\  --env MYSQL_DATABASE=wordpress \\  mysql:5.7 上面的命令会基于 MySQL 的 image` 文件（5.7版本）新建一个容器。该命令的五个命令行参数的含义如下\n -d：容器启动后，在后台运行。 --rm：容器终止运行后，自动删除容器文件。 --name wordpressdb：容器的名字叫做 wordpressdb --env MYSQL_ROOT_PASSWORD=123456：向容器进程传入一个环境变量 MYSQL_ROOT_PASSWORD，该变量会被用作 MySQL 的根密码。 --env MYSQL_DATABASE=wordpress：向容器进程传入一个环境变量 MYSQL_DATABASE，容器里面的 MySQL 会根据该变量创建一个同名数据库（本例是WordPress）。  4 定制 PHP 容器 首先，停掉 WordPress 容器。\n$ docker container stop wordpress 停掉以后，由于 --rm 参数的作用，该容器文件会被自动删除。\n然后，在 docker-demo 目录里面，新建一个 Dockerfile 文件，写入下面的内容。\nFROMphp:7.2-apacheRUN docker-php-ext-install mysqliCMD apache2-foreground上面代码的意思，就是在原来 PHP 的 image 基础上，安装 mysqli 的扩展。然后，启动 Apache。\n基于这个 Dockerfile 文件，新建一个名为 phpwithmysql 的 image 文件。\n$ docker build -t phpwithmysql . 5 定制容器连接 mysql docker container run \\  --rm \\  --name wordpress \\  -p 8000:80 \\  --volume \"$PWD/\":/var/www/html \\  --link wordpressdb:mysql \\  phpwithmysql 连接 mysql ···\n弹出如下界面 切换到 wordPress 目录，将上述内容复制\n$ cd /wordpress $ vim wp-config.php 上述类容复制到 wp-config.php 文件中 最后一行加上\n? 6 其他问题 6.1 安装主体无法连接主机 打开 wp-config.php文件 vim /usr/share/wordpress/wp-config.php,\n在最后面加上\ndefine('FS_METHOD', \"direct\"); 6.2 无法创建目录 无法创建目录通常是没有权限.\nchmod -R 777 wordpress/ 6.3 无法",
   "wordCount" : "260",
@@ -345,7 +345,7 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://hzw9527.github.io/tags/wordpress/">wordpress</a></li>
+      <li><a href="https://hzw9527.github.io/tags/docker/">docker</a></li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://hzw9527.github.io/posts/docker/docker_introduction/">
@@ -363,7 +363,7 @@
 
 <div class="share-buttons">
     <a target="_blank" rel="noopener noreferrer" aria-label="share Docker_wordpress on twitter"
-        href="https://twitter.com/intent/tweet/?text=Docker_wordpress&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fdocker%2fdocker_wordpress%2f&amp;hashtags=wordpress">
+        href="https://twitter.com/intent/tweet/?text=Docker_wordpress&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fdocker%2fdocker_wordpress%2f&amp;hashtags=docker">
         <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
             <path
                 d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />

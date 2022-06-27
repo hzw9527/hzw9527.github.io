@@ -19,5 +19,14 @@
       <description>&lt;p&gt;docker 简介。&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Docker_wordpress</title>
+      <link>https://hzw9527.github.io/posts/docker/docker_wordpress/</link>
+      <pubDate>Sat, 25 Jun 2022 14:55:26 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/docker/docker_wordpress/</guid>
+      <description>&lt;p&gt;docker 搭建 wordpress&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
