@@ -9,7 +9,16 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 27 Jun 2022 23:16:27 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Jul 2022 09:33:41 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>shell</title>
+      <link>https://hzw9527.github.io/tags/shell/</link>
+      <pubDate>Sat, 09 Jul 2022 09:33:41 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/tags/shell/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>docker</title>
       <link>https://hzw9527.github.io/tags/docker/</link>
