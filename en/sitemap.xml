@@ -18,13 +18,13 @@
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/categories/</loc>
-    <lastmod>2022-07-09T23:11:08+08:00</lastmod>
+    <lastmod>2022-07-10T23:27:18+08:00</lastmod>
   </url><url>
-    <loc>https://hzw9527.github.io/categories/go/</loc>
-    <lastmod>2022-07-09T23:11:08+08:00</lastmod>
+    <loc>https://hzw9527.github.io/posts/argo/complexity/</loc>
+    <lastmod>2022-07-10T23:27:18+08:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/</loc>
-    <lastmod>2022-07-09T23:11:08+08:00</lastmod>
+    <lastmod>2022-07-10T23:27:18+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -41,14 +41,8 @@
                 href="https://hzw9527.github.io/"
                 />
   </url><url>
-    <loc>https://hzw9527.github.io/tags/log/</loc>
-    <lastmod>2022-07-09T23:11:08+08:00</lastmod>
-  </url><url>
-    <loc>https://hzw9527.github.io/posts/go/log_use/</loc>
-    <lastmod>2022-07-09T23:11:08+08:00</lastmod>
-  </url><url>
     <loc>https://hzw9527.github.io/posts/</loc>
-    <lastmod>2022-07-09T23:11:08+08:00</lastmod>
+    <lastmod>2022-07-10T23:27:18+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -66,6 +60,21 @@
                 />
   </url><url>
     <loc>https://hzw9527.github.io/tags/</loc>
+    <lastmod>2022-07-10T23:27:18+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/tags/%E5%A4%A7o/</loc>
+    <lastmod>2022-07-10T23:27:18+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2022-07-10T23:27:18+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/categories/go/</loc>
+    <lastmod>2022-07-09T23:11:08+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/tags/log/</loc>
+    <lastmod>2022-07-09T23:11:08+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/posts/go/log_use/</loc>
     <lastmod>2022-07-09T23:11:08+08:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/tags/shell/</loc>
