@@ -9,7 +9,7 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 10 Jul 2022 23:27:18 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Jul 2022 22:48:41 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Installation | Update</title>
       <link>https://hzw9527.github.io/posts/papermod/papermod-installation/</link>
@@ -53,6 +53,15 @@
       
       <guid>https://hzw9527.github.io/posts/papermod/papermod-variables/</guid>
       <description>List of Front Matter variables used by PaperMod</description>
+    </item>
+    
+    <item>
+      <title>file navigation</title>
+      <link>https://hzw9527.github.io/posts/linux/file_navigation/</link>
+      <pubDate>Mon, 11 Jul 2022 22:48:41 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/file_navigation/</guid>
+      <description>&lt;p&gt;linux 文件系统中导航。&lt;/p&gt;</description>
     </item>
     
     <item>
