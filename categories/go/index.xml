@@ -9,7 +9,16 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 09 Jul 2022 23:11:08 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Jul 2022 22:57:34 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Timer</title>
+      <link>https://hzw9527.github.io/posts/go/timer/</link>
+      <pubDate>Tue, 12 Jul 2022 22:57:34 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/timer/</guid>
+      <description>&lt;p&gt;go 的简单的定时器。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Log_use</title>
       <link>https://hzw9527.github.io/posts/go/log_use/</link>
