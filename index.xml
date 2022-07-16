@@ -9,7 +9,7 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 16 Jul 2022 08:51:45 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jul 2022 23:37:16 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Installation | Update</title>
       <link>https://hzw9527.github.io/posts/papermod/papermod-installation/</link>
@@ -53,6 +53,15 @@
       
       <guid>https://hzw9527.github.io/posts/papermod/papermod-variables/</guid>
       <description>List of Front Matter variables used by PaperMod</description>
+    </item>
+    
+    <item>
+      <title>Go_dir_design</title>
+      <link>https://hzw9527.github.io/posts/go/go_dir_design/</link>
+      <pubDate>Sat, 16 Jul 2022 23:37:16 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_dir_design/</guid>
+      <description>&lt;p&gt;如何规范go项目目录&lt;/p&gt;</description>
     </item>
     
     <item>
