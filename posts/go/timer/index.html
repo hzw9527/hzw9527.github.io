@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>Timer | hzw</title>
 <meta name="keywords" content="timer">
-<meta name="description" content="go 的简单的定时器。">
+<meta name="description" content="go 的简单的定时器">
 <meta name="author" content="Theme PaperMod">
 <link rel="canonical" href="https://hzw9527.github.io/posts/go/timer/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.abbb4007d57c8d9f0a51f45f3d2e079cbeff25fc61fbcfb3135b95a5a6daf57c.css" integrity="sha256-q7tAB9V8jZ8KUfRfPS4HnL7/Jfxh&#43;8&#43;zE1uVpaba9Xw=" rel="preload stylesheet" as="style">
@@ -58,7 +58,7 @@
 
     </style>
 </noscript><meta property="og:title" content="Timer" />
-<meta property="og:description" content="go 的简单的定时器。" />
+<meta property="og:description" content="go 的简单的定时器" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hzw9527.github.io/posts/go/timer/" /><meta property="og:image" content="https://hzw9527.github.io/papermod-cover.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-12T22:57:34&#43;08:00" />
@@ -68,7 +68,7 @@
 <meta name="twitter:image" content="https://hzw9527.github.io/papermod-cover.png"/>
 
 <meta name="twitter:title" content="Timer"/>
-<meta name="twitter:description" content="go 的简单的定时器。"/>
+<meta name="twitter:description" content="go 的简单的定时器"/>
 
 
 <script type="application/ld+json">
@@ -97,11 +97,11 @@
   "@type": "BlogPosting",
   "headline": "Timer",
   "name": "Timer",
-  "description": "go 的简单的定时器。\n",
+  "description": "go 的简单的定时器\n",
   "keywords": [
     "timer"
   ],
-  "articleBody": "go 的简单的定时器。\n1 自动执行定时器 t := time.NewTicker(time.Duration(1) * time.Second) for { select { case t.C: fmt.Println(1) } } 每隔 1 秒打印。\n2 简单定时器重置定时器 waitTime := time.Second * time.Duration(2) ter := time.NewTimer(waitTime) for { ter.C fmt.Println(\"==========================\") // 只有重置后才会进行下一次循环  ter.Reset(waitTime) } 每隔 2 秒打印。\n",
+  "articleBody": "go 的简单的定时器\n1 自动执行定时器 t := time.NewTicker(time.Duration(1) * time.Second) for { select { case t.C: fmt.Println(1) } } 每隔 1 秒打印。\n2 简单定时器重置定时器 waitTime := time.Second * time.Duration(2) ter := time.NewTimer(waitTime) for { ter.C fmt.Println(\"==========================\") // 只有重置后才会进行下一次循环  ter.Reset(waitTime) } 每隔 2 秒打印。\n",
   "wordCount" : "42",
   "inLanguage": "en",
   "datePublished": "2022-07-12T22:57:34+08:00",
@@ -227,7 +227,7 @@
     </details>
 </div>
 
-  <div class="post-content"><p>go 的简单的定时器。</p>
+  <div class="post-content"><p>go 的简单的定时器</p>
 <h2 id="1-自动执行定时器">1 自动执行定时器<a hidden class="anchor" aria-hidden="true" href="#1-自动执行定时器">#</a></h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">t</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">NewTicker</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Duration</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">{</span>
