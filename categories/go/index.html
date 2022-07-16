@@ -159,6 +159,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Go_install
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>1 go 环境配置 下载源码
+$ wget -P /tmp/ https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz 解压安装
+$ mkdir -p $HOME/go $ tar -xvzf /tmp/go1.18.3.linux-amd64.tar.gz -C $HOME/go $ mv $HOME/go/go $HOME/go/go1.18.3 环境变量追加到 $HOME/.bashrc
+$ tee -a $HOME/.bashrc &lt;&lt;&#39;EOF&#39; # Go envs export GOVERSION=go1.18.3 # Go 版本设置 export GO_INSTALL_DIR=$HOME/go # Go 安装目录 export GOROOT=$GO_INSTALL_DIR/$GOVERSION # GOROOT 设置 export GOPATH=$WORKSPACE/golang # GOPATH 设置 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH # 将 Go 语言自带的和通过 go install 安装的二进制文件加入到 PATH 路径中 export GO111MODULE=&#34;on&#34; # 开启 Go moudles 特性 export GOPROXY=https://goproxy....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-07-16 08:51:45 +0800 CST'>July 16, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Theme PaperMod</footer>
+  <a class="entry-link" aria-label="post link to Go_install" href="https://hzw9527.github.io/posts/go_install/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Timer
     </h2>
   </header>

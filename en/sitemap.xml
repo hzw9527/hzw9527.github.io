@@ -18,10 +18,19 @@
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/categories/</loc>
-    <lastmod>2022-07-13T22:39:44+08:00</lastmod>
+    <lastmod>2022-07-16T08:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/categories/go/</loc>
+    <lastmod>2022-07-16T08:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/tags/go_install/</loc>
+    <lastmod>2022-07-16T08:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/posts/go_install/</loc>
+    <lastmod>2022-07-16T08:51:45+08:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/</loc>
-    <lastmod>2022-07-13T22:39:44+08:00</lastmod>
+    <lastmod>2022-07-16T08:51:45+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -38,14 +47,8 @@
                 href="https://hzw9527.github.io/"
                 />
   </url><url>
-    <loc>https://hzw9527.github.io/categories/linux/</loc>
-    <lastmod>2022-07-13T22:39:44+08:00</lastmod>
-  </url><url>
-    <loc>https://hzw9527.github.io/tags/linux%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2022-07-13T22:39:44+08:00</lastmod>
-  </url><url>
     <loc>https://hzw9527.github.io/posts/</loc>
-    <lastmod>2022-07-13T22:39:44+08:00</lastmod>
+    <lastmod>2022-07-16T08:51:45+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -63,13 +66,16 @@
                 />
   </url><url>
     <loc>https://hzw9527.github.io/tags/</loc>
+    <lastmod>2022-07-16T08:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/categories/linux/</loc>
+    <lastmod>2022-07-13T22:39:44+08:00</lastmod>
+  </url><url>
+    <loc>https://hzw9527.github.io/tags/linux%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2022-07-13T22:39:44+08:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/posts/linux/ls/</loc>
     <lastmod>2022-07-13T22:39:44+08:00</lastmod>
-  </url><url>
-    <loc>https://hzw9527.github.io/categories/go/</loc>
-    <lastmod>2022-07-12T22:57:34+08:00</lastmod>
   </url><url>
     <loc>https://hzw9527.github.io/tags/timer/</loc>
     <lastmod>2022-07-12T22:57:34+08:00</lastmod>

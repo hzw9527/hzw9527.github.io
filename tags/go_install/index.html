@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head>
-	<meta name="generator" content="Hugo 0.99.0-DEV" /><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>hzw</title>
-
+<title>go_install | hzw</title>
+<meta name="keywords" content="">
 <meta name="description" content="Theme PaperMod - https://github.com/hzw9527.github.io">
 <meta name="author" content="Theme PaperMod">
-<link rel="canonical" href="https://hzw9527.github.io/">
+<link rel="canonical" href="https://hzw9527.github.io/tags/go_install/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.abbb4007d57c8d9f0a51f45f3d2e079cbeff25fc61fbcfb3135b95a5a6daf57c.css" integrity="sha256-q7tAB9V8jZ8KUfRfPS4HnL7/Jfxh&#43;8&#43;zE1uVpaba9Xw=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://hzw9527.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://hzw9527.github.io/favicon-16x16.png">
@@ -19,11 +18,8 @@
 <link rel="mask-icon" href="https://hzw9527.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://hzw9527.github.io/index.xml">
-<link rel="alternate" type="application/json" href="https://hzw9527.github.io/index.json">
-<link rel="alternate" hreflang="en" href="https://hzw9527.github.io/">
-<link rel="alternate" hreflang="fr" href="https://hzw9527.github.io/fr/">
-<link rel="alternate" hreflang="fa" href="https://hzw9527.github.io/fa/">
+<link rel="alternate" type="application/rss+xml" href="https://hzw9527.github.io/tags/go_install/index.xml">
+<link rel="alternate" hreflang="en" href="https://hzw9527.github.io/tags/go_install/">
 <noscript>
     <style>
         #theme-toggle,
@@ -60,30 +56,17 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="hzw" />
+</noscript><meta property="og:title" content="go_install" />
 <meta property="og:description" content="Theme PaperMod - https://github.com/hzw9527.github.io" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://hzw9527.github.io/" /><meta property="og:image" content="https://hzw9527.github.io/papermod-cover.png"/>
+<meta property="og:url" content="https://hzw9527.github.io/tags/go_install/" /><meta property="og:image" content="https://hzw9527.github.io/papermod-cover.png"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://hzw9527.github.io/papermod-cover.png"/>
 
-<meta name="twitter:title" content="hzw"/>
+<meta name="twitter:title" content="go_install"/>
 <meta name="twitter:description" content="Theme PaperMod - https://github.com/hzw9527.github.io"/>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "hzw",
-  "url": "https://hzw9527.github.io/",
-  "description": "Theme PaperMod - https://github.com/hzw9527.github.io",
-  "thumbnailUrl": "https://hzw9527.github.io/favicon.ico",
-  "sameAs": [
-      "https://github.com/hzw9527.github.io", "https://ko-fi.com/adityatelange", "index.xml"
-  ]
-}
-</script>
 </head>
 
 <body class="list" id="top">
@@ -160,85 +143,34 @@
     </nav>
 </header>
 <main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://hzw9527.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://hzw9527.github.io/tags/">Tags</a></div>
+  <h1>
+    go_install
+    <a href="index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+</header>
 
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Single_factory
+    <h2>Go_install
     </h2>
   </header>
   <div class="entry-content">
-    <p>学习创建型模式-简单工厂模式
-...</p>
+    <p>1 go 环境配置 下载源码
+$ wget -P /tmp/ https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz 解压安装
+$ mkdir -p $HOME/go $ tar -xvzf /tmp/go1.18.3.linux-amd64.tar.gz -C $HOME/go $ mv $HOME/go/go $HOME/go/go1.18.3 环境变量追加到 $HOME/.bashrc
+$ tee -a $HOME/.bashrc &lt;&lt;&#39;EOF&#39; # Go envs export GOVERSION=go1.18.3 # Go 版本设置 export GO_INSTALL_DIR=$HOME/go # Go 安装目录 export GOROOT=$GO_INSTALL_DIR/$GOVERSION # GOROOT 设置 export GOPATH=$WORKSPACE/golang # GOPATH 设置 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH # 将 Go 语言自带的和通过 go install 安装的二进制文件加入到 PATH 路径中 export GO111MODULE=&#34;on&#34; # 开启 Go moudles 特性 export GOPROXY=https://goproxy....</p>
   </div>
-  <footer class="entry-footer"><span title='2022-06-06 21:36:34 +0800 CST'>June 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Theme PaperMod</footer>
-  <a class="entry-link" aria-label="post link to Single_factory" href="https://hzw9527.github.io/posts/pattern/single_factory/"></a>
+  <footer class="entry-footer"><span title='2022-07-16 08:51:45 +0800 CST'>July 16, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Theme PaperMod</footer>
+  <a class="entry-link" aria-label="post link to Go_install" href="https://hzw9527.github.io/posts/go_install/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Single
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>创建型模式-单例模式
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-06-06 21:34:07 +0800 CST'>June 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Theme PaperMod</footer>
-  <a class="entry-link" aria-label="post link to Single" href="https://hzw9527.github.io/posts/pattern/single/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Blog_install<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>1 安装之前的准备工作  需要安装好 hugo 需要安装好对应的 go 版本，新下载的 hugo 程序可能依赖对应的 go 版本  2 搭建博客 这里以主题 papermod 为例
-2.1 创建你的博客 $ hugo new site blog 2.2 使用 hugo 主题 $ cd blog $ git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1 2.3 修改配置文件 切换到博客根目录， 删除 toml 文件，创建 config.yaml 文件，内容如下
-baseURL: &#34;https://examplesite.com/&#34; title: ExampleSite paginate: 5 theme: PaperMod enableRobotsTXT: true buildDrafts: false buildFuture: false buildExpired: false googleAnalytics: UA-123-45 minify: disableXML: true minifyOutput: true params: env: production # to enable google analytics, opengraph, twitter-cards and schema....</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-05-26 22:35:30 +0800 CST'>May 26, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Theme PaperMod</footer>
-  <a class="entry-link" aria-label="post link to Blog_install" href="https://hzw9527.github.io/posts/blog/blog_install/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Git_merge
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>git merge 1 git merge 默认操作 创建 develop 分支 基于 develop 分支创建 feature/print-1 分支
-git checkout -b feature/print-1 develop 完成 feature/print-1 分支开发，有两个提交，当前视图如下
-切换到 develop 分支 merge feature/print-1 分支
-git merge feature/print-1 视图如下
-2 git merge –no-ff 基于 develop 分支创建了feature-print2 分支，完成两次提交 add3 add4 后切换到
-develop 分支，紧接着合并 feature-print2,
-git merge --no-ff feature/print-2 3 git merge –squash 基于 develop 分支创建了feature-print3 分支，完成两次提交 print3-1 print3-2 后切换到
-develop 分支，紧接着合并 feature-print3,
-git merge --squash feature/print-2 4 git merge 示意图 git merge 默认操作 git merge –no-ff git merge –squash </p>
-  </div>
-  <footer class="entry-footer"><span title='2022-05-17 21:48:17 +0800 CST'>May 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Theme PaperMod</footer>
-  <a class="entry-link" aria-label="post link to Git_merge" href="https://hzw9527.github.io/posts/git/git_merge/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Git_flow
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>git flow工作流
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-05-17 21:36:42 +0800 CST'>May 17, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Theme PaperMod</footer>
-  <a class="entry-link" aria-label="post link to Git_flow" href="https://hzw9527.github.io/posts/git/git_flow/"></a>
-</article>
-<footer class="page-footer">
-  <nav class="pagination">
-    <a class="prev" href="https://hzw9527.github.io/page/4/">« Prev</a>
-    <a class="next" href="https://hzw9527.github.io/page/6/">Next »</a>
-  </nav>
-</footer>
     </main>
     
 <footer class="footer">

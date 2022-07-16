@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>go on hzw</title>
-    <link>https://hzw9527.github.io/categories/go/</link>
-    <description>Recent content in go on hzw</description>
+    <title>go_install on hzw</title>
+    <link>https://hzw9527.github.io/tags/go_install/</link>
+    <description>Recent content in go_install on hzw</description>
     <image>
       <url>https://hzw9527.github.io/papermod-cover.png</url>
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 16 Jul 2022 08:51:45 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jul 2022 08:51:45 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/go_install/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go_install</title>
       <link>https://hzw9527.github.io/posts/go_install/</link>
@@ -20,33 +20,6 @@
 $ wget -P /tmp/ https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz 解压安装
 $ mkdir -p $HOME/go $ tar -xvzf /tmp/go1.18.3.linux-amd64.tar.gz -C $HOME/go $ mv $HOME/go/go $HOME/go/go1.18.3 环境变量追加到 $HOME/.bashrc
 $ tee -a $HOME/.bashrc &amp;lt;&amp;lt;&amp;#39;EOF&amp;#39; # Go envs export GOVERSION=go1.18.3 # Go 版本设置 export GO_INSTALL_DIR=$HOME/go # Go 安装目录 export GOROOT=$GO_INSTALL_DIR/$GOVERSION # GOROOT 设置 export GOPATH=$WORKSPACE/golang # GOPATH 设置 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH # 将 Go 语言自带的和通过 go install 安装的二进制文件加入到 PATH 路径中 export GO111MODULE=&amp;#34;on&amp;#34; # 开启 Go moudles 特性 export GOPROXY=https://goproxy.</description>
-    </item>
-    
-    <item>
-      <title>Timer</title>
-      <link>https://hzw9527.github.io/posts/go/timer/</link>
-      <pubDate>Tue, 12 Jul 2022 22:57:34 +0800</pubDate>
-      
-      <guid>https://hzw9527.github.io/posts/go/timer/</guid>
-      <description>&lt;p&gt;go 的简单的定时器。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Log_use</title>
-      <link>https://hzw9527.github.io/posts/go/log_use/</link>
-      <pubDate>Sat, 09 Jul 2022 23:11:08 +0800</pubDate>
-      
-      <guid>https://hzw9527.github.io/posts/go/log_use/</guid>
-      <description>&lt;p&gt;自定义 log 的使用&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Go_test</title>
-      <link>https://hzw9527.github.io/posts/go/go_test/</link>
-      <pubDate>Mon, 13 Jun 2022 23:02:46 +0800</pubDate>
-      
-      <guid>https://hzw9527.github.io/posts/go/go_test/</guid>
-      <description>&lt;p&gt;如何编写单元测试和性能测试用例&lt;/p&gt;</description>
     </item>
     
   </channel>
