@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>gorm on hzw</title>
+    <link>https://hzw9527.github.io/tags/gorm/</link>
+    <description>Recent content in gorm on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 21 Jul 2022 22:47:42 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/gorm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gorm</title>
+      <link>https://hzw9527.github.io/posts/go/gorm/</link>
+      <pubDate>Thu, 21 Jul 2022 22:47:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/gorm/</guid>
+      <description>&lt;p&gt;CURD 神器 GORM 包介绍及实战&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

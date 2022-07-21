@@ -9,7 +9,16 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 16 Jul 2022 23:37:16 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Jul 2022 22:47:42 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gorm</title>
+      <link>https://hzw9527.github.io/tags/gorm/</link>
+      <pubDate>Thu, 21 Jul 2022 22:47:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/tags/gorm/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>项目目录设计</title>
       <link>https://hzw9527.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E8%AE%BE%E8%AE%A1/</link>
