@@ -9,7 +9,16 @@
       <link>https://hzw9527.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 16 Jul 2022 23:37:16 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Jul 2022 22:47:42 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gorm</title>
+      <link>https://hzw9527.github.io/posts/go/gorm/</link>
+      <pubDate>Thu, 21 Jul 2022 22:47:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/gorm/</guid>
+      <description>&lt;p&gt;CURD 神器 GORM 包介绍及实战&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Go_dir_design</title>
       <link>https://hzw9527.github.io/posts/go/go_dir_design/</link>
