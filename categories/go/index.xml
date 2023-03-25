@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>go on hzw</title>
+    <link>https://hzw9527.github.io/categories/go/</link>
+    <description>Recent content in go on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 25 Feb 2023 17:50:09 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pflag使用</title>
+      <link>https://hzw9527.github.io/posts/go/pflag/</link>
+      <pubDate>Sat, 25 Feb 2023 17:50:09 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/pflag/</guid>
+      <description>&lt;p&gt;使用 pflag 包来解析命令行参数&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>flag</title>
+      <link>https://hzw9527.github.io/posts/go/flag/</link>
+      <pubDate>Sun, 11 Dec 2022 22:06:43 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/flag/</guid>
+      <description>&lt;p&gt;官方包 flag 介绍&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>design_pattern</title>
+      <link>https://hzw9527.github.io/posts/go/go_common_design_pattern/</link>
+      <pubDate>Sun, 04 Dec 2022 16:53:14 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_common_design_pattern/</guid>
+      <description>&lt;p&gt;go 常用的设计模式&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go_modules</title>
+      <link>https://hzw9527.github.io/posts/go/go_modules/</link>
+      <pubDate>Wed, 21 Sep 2022 23:17:56 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_modules/</guid>
+      <description>&lt;p&gt;Go Modules依赖包管理&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gorm</title>
+      <link>https://hzw9527.github.io/posts/go/gorm/</link>
+      <pubDate>Thu, 21 Jul 2022 22:47:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/gorm/</guid>
+      <description>&lt;p&gt;CURD 神器 GORM 包介绍及实战&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go_dir_design</title>
+      <link>https://hzw9527.github.io/posts/go/go_dir_design/</link>
+      <pubDate>Sat, 16 Jul 2022 23:37:16 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_dir_design/</guid>
+      <description>&lt;p&gt;如何规范go项目目录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go_install</title>
+      <link>https://hzw9527.github.io/posts/go/go_install/</link>
+      <pubDate>Sat, 16 Jul 2022 08:51:45 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_install/</guid>
+      <description>&lt;p&gt;go 安装教程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Timer</title>
+      <link>https://hzw9527.github.io/posts/go/timer/</link>
+      <pubDate>Tue, 12 Jul 2022 22:57:34 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/timer/</guid>
+      <description>&lt;p&gt;go 的简单的定时器&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Log_use</title>
+      <link>https://hzw9527.github.io/posts/go/log_use/</link>
+      <pubDate>Sat, 09 Jul 2022 23:11:08 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/log_use/</guid>
+      <description>&lt;p&gt;自定义 log 的使用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go_test</title>
+      <link>https://hzw9527.github.io/posts/go/go_test/</link>
+      <pubDate>Mon, 13 Jun 2022 23:02:46 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_test/</guid>
+      <description>&lt;p&gt;如何编写单元测试和性能测试用例&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

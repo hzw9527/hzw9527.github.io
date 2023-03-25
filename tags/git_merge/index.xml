@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>git_merge on hzw</title>
+    <link>https://hzw9527.github.io/tags/git_merge/</link>
+    <description>Recent content in git_merge on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 17 May 2022 21:48:17 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/git_merge/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git_merge</title>
+      <link>https://hzw9527.github.io/posts/git/git_merge/</link>
+      <pubDate>Tue, 17 May 2022 21:48:17 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/git/git_merge/</guid>
+      <description>git merge 1 git merge 默认操作 创建 develop 分支 基于 develop 分支创建 feature/print-1 分支
+git checkout -b feature/print-1 develop 完成 feature/print-1 分支开发，有两个提交，当前视图如下
+切换到 develop 分支 merge feature/print-1 分支
+git merge feature/print-1 视图如下
+2 git merge &amp;ndash;no-ff 基于 develop 分支创建了feature-print2 分支，完成两次提交 add3 add4 后切换到
+develop 分支，紧接着合并 feature-print2,
+git merge --no-ff feature/print-2 3 git merge &amp;ndash;squash 基于 develop 分支创建了feature-print3 分支，完成两次提交 print3-1 print3-2 后切换到
+develop 分支，紧接着合并 feature-print3,
+git merge --squash feature/print-2 4 git merge 示意图 git merge 默认操作 git merge &amp;ndash;no-ff git merge &amp;ndash;squash </description>
+    </item>
+    
+  </channel>
+</rss>

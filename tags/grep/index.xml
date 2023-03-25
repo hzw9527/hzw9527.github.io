@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>grep on hzw</title>
+    <link>https://hzw9527.github.io/tags/grep/</link>
+    <description>Recent content in grep on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 10 Aug 2022 22:51:49 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/grep/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Grep</title>
+      <link>https://hzw9527.github.io/posts/linux/grep/</link>
+      <pubDate>Wed, 10 Aug 2022 22:51:49 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/grep/</guid>
+      <description>&lt;p&gt;I/O重定向&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

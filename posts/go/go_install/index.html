@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Go_install | hzw</title>
+<meta name="keywords" content="go_install">
+<meta name="description" content="go 安装教程">
+<meta name="author" content="Theme PaperMod">
+<link rel="canonical" href="https://hzw9527.github.io/posts/go/go_install/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.abbb4007d57c8d9f0a51f45f3d2e079cbeff25fc61fbcfb3135b95a5a6daf57c.css" integrity="sha256-q7tAB9V8jZ8KUfRfPS4HnL7/Jfxh&#43;8&#43;zE1uVpaba9Xw=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://hzw9527.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hzw9527.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hzw9527.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hzw9527.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hzw9527.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hzw9527.github.io/posts/go/go_install/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Go_install" />
+<meta property="og:description" content="go 安装教程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hzw9527.github.io/posts/go/go_install/" /><meta property="og:image" content="https://hzw9527.github.io/papermod-cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-16T08:51:45&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-16T08:51:45&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hzw9527.github.io/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Go_install"/>
+<meta name="twitter:description" content="go 安装教程"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hzw9527.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Go_install",
+      "item": "https://hzw9527.github.io/posts/go/go_install/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Go_install",
+  "name": "Go_install",
+  "description": "go 安装教程\n",
+  "keywords": [
+    "go_install"
+  ],
+  "articleBody": "go 安装教程\n1 go 环境配置 下载源码\n$ wget -P /tmp/ https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz 解压安装\n$ mkdir -p $HOME/go $ tar -xvzf /tmp/go1.18.3.linux-amd64.tar.gz -C $HOME/go $ mv $HOME/go/go $HOME/go/go1.18.3 环境变量追加到 $HOME/.bashrc\n$ tee -a $HOME/.bashrc # Go envs export GOVERSION=go1.18.3 # Go 版本设置 export GO_INSTALL_DIR=$HOME/go # Go 安装目录 export GOROOT=$GO_INSTALL_DIR/$GOVERSION # GOROOT 设置 export GOPATH=$WORKSPACE/golang # GOPATH 设置 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH # 将 Go 语言自带的和通过 go install 安装的二进制文件加入到 PATH 路径中 export GO111MODULE=\"on\" # 开启 Go moudles 特性 export GOPROXY=https://goproxy.cn,direct # 安装 Go 模块时，代理服务器设置 export GOPRIVATE= export GOSUMDB=off # 关闭校验 Go 依赖包的哈希值 EOF 2 go 的环境变量的意义 GOROOT\ngo 编译工具，标准库的安装路径。\nGOPATH\ngo 的工作目录和 import 包的导入目录。\n 默认不设置的情况下，unix 中为 $HOME/go， window 为 C:\\Users\\YourName\\go。 GOPATH 不能与您的 Go 安装路径相同。 在 GOPATH 下创建 bin 目录，go 编译后生成的二进制文件将存放在此目录。     环境变量 含义     GOROOT Go 语言编译工具、标准库等的安装路径   GOPATH Go的工作目录,也就是编译后二进制文件的存放目录和 import 包时的搜索路径。 默认不设置的情况下，unix 中为 $HOME/go， window 为 C:\\Users\\YourName\\go。 GOPATH 不能与您的 Go 安装路径相同。 在 GOPATH 下创建 bin 目录，go 编译后生成的二进制文件将存放在此目录。   GO111MODULE 通过设置 on、off、auto  来控制是否开启 Go modules 特性。其中 on 代表开启 GO modules, 这会让 go 编译器忽略 $GOPATH 和 vendor 文件夹，只根据 go.mod 下载依赖。off 代表关闭 go modules 特性，这回让 go 编译器在 $GOPATH  和 vendor 目录来查找依赖关系，也就是继续使用 GOPATH 模式。而 auto 在 go 1.14 后的版本是默认值。设置为 auto 后，源码在 $gopath/src下，并且没有 go.mod 则关闭 go modules,其他情况都开启 go modules。   goproxy go包下载代理服务器。国内无法访问 golang.org 和 Google 等网站，但是在日常开发中使用的很多依赖包都要从 Google 上下载.为了解决加载依赖的问题，以便我们可以使用 go get 下载。 direct 作用：当 go 抓取目标包时，如果遇见了 404 错误，那么就会直接通过目标的源头获取，而不再通过设置的代理服务器下载。   GOPRIVATE 指定不走代理的下载 go 包的域名，go get 正常通过代理服务器获取私有仓库（内部站点或者私有站点），代理服务器不可能访问到私有仓库，会出现 404 错误，设置 GOPAIVATE 变量，可以让以该域名开头的包不走代理，直接下载。 go env -w GOPRIVATE = .gitlab.com,.gitee.com 。   GOSUMDB GOSUMDB 的值是一个 web 服务器，默认是 sum.golang.org，该服务可以用来查询依赖包指定版本的哈希值，保证拉取到的模块版本数据未经过篡改。      建议在日常开发中 GO111MODULE 设置为 on。\n  使用 go mod 时， $GOPATH 虽说时无意义的，但是还是会把下载的依赖存在 $GOPATH/pkg/mod 中，也会把 go intall 安装的的二进制文件存放在 $GOPATH/bin 的目录中。\n  $GOPATH/bin、$GOROOT/bin 加入到 PATH 环境变量中，这样就可以直接使用 go 自带和 go install 安装的命令。\n ",
+  "wordCount" : "253",
+  "inLanguage": "en",
+  "datePublished": "2022-07-16T08:51:45+08:00",
+  "dateModified": "2022-07-16T08:51:45+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Theme PaperMod"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hzw9527.github.io/posts/go/go_install/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hzw",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hzw9527.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hzw9527.github.io/" accesskey="h" title="hzw (Alt + H)">hzw</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fr/" title="French"
+                            aria-label=":fr:">🇫🇷</a>
+                    </li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fa/" title="Fa"
+                            aria-label="Fa">Fa</a>
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hzw9527.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://hzw9527.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://hzw9527.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Go_install
+    </h1>
+    <div class="post-meta"><span title='2022-07-16 08:51:45 +0800 CST'>July 16, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href="https://github.com/hzw9527.github.io/tree/exampleSite/content/posts/go/go_install.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-go-%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae" aria-label="1 go 环境配置">1 go 环境配置</a></li>
+                <li>
+                    <a href="#2-go-%e7%9a%84%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e7%9a%84%e6%84%8f%e4%b9%89" aria-label="2 go 的环境变量的意义">2 go 的环境变量的意义</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>go 安装教程</p>
+<h2 id="1-go-环境配置">1 go 环境配置<a hidden class="anchor" aria-hidden="true" href="#1-go-环境配置">#</a></h2>
+<p><strong>下载源码</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ wget -P /tmp/ https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz
+</span></span></code></pre></div><p><strong>解压安装</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ mkdir -p <span class="nv">$HOME</span>/go
+</span></span><span class="line"><span class="cl">$ tar -xvzf /tmp/go1.18.3.linux-amd64.tar.gz -C <span class="nv">$HOME</span>/go
+</span></span><span class="line"><span class="cl">$ mv <span class="nv">$HOME</span>/go/go <span class="nv">$HOME</span>/go/go1.18.3
+</span></span></code></pre></div><p><strong>环境变量追加到 $HOME/.bashrc</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tee -a <span class="nv">$HOME</span>/.bashrc <span class="s">&lt;&lt;&#39;EOF&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s"># Go envs
+</span></span></span><span class="line"><span class="cl"><span class="s">export GOVERSION=go1.18.3 # Go 版本设置
+</span></span></span><span class="line"><span class="cl"><span class="s">export GO_INSTALL_DIR=$HOME/go # Go 安装目录
+</span></span></span><span class="line"><span class="cl"><span class="s">export GOROOT=$GO_INSTALL_DIR/$GOVERSION # GOROOT 设置
+</span></span></span><span class="line"><span class="cl"><span class="s">export GOPATH=$WORKSPACE/golang # GOPATH 设置
+</span></span></span><span class="line"><span class="cl"><span class="s">export PATH=$GOROOT/bin:$GOPATH/bin:$PATH # 将 Go 语言自带的和通过 go install 安装的二进制文件加入到 PATH 路径中
+</span></span></span><span class="line"><span class="cl"><span class="s">export GO111MODULE=&#34;on&#34; # 开启 Go moudles 特性
+</span></span></span><span class="line"><span class="cl"><span class="s">export GOPROXY=https://goproxy.cn,direct # 安装 Go 模块时，代理服务器设置
+</span></span></span><span class="line"><span class="cl"><span class="s">export GOPRIVATE=
+</span></span></span><span class="line"><span class="cl"><span class="s">export GOSUMDB=off # 关闭校验 Go 依赖包的哈希值
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><h2 id="2-go-的环境变量的意义">2 go 的环境变量的意义<a hidden class="anchor" aria-hidden="true" href="#2-go-的环境变量的意义">#</a></h2>
+<p><strong>GOROOT</strong></p>
+<p>go 编译工具，标准库的安装路径。</p>
+<p><strong>GOPATH</strong></p>
+<p>go 的工作目录和 import 包的导入目录。</p>
+<ul>
+<li>默认不设置的情况下，<code>unix</code> 中为  <code>$HOME/go</code>， window 为 <code>C:\Users\YourName\go</code>。</li>
+<li><code>GOPATH</code> 不能与您的 <code>Go</code> 安装路径相同。</li>
+<li>在 <code>GOPATH</code> 下创建 bin 目录，go 编译后生成的二进制文件将存放在此目录。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>环境变量</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GOROOT</code></td>
+<td style="text-align:left"><code>Go</code> 语言编译工具、标准库等的安装路径</td>
+</tr>
+<tr>
+<td><code>GOPATH</code></td>
+<td style="text-align:left"><code>Go</code>的工作目录,也就是编译后二进制文件的存放目录和 import 包时的搜索路径。 默认不设置的情况下，unix 中为 <code>$HOME/go</code>， <code>window</code> 为 <code>C:\Users\YourName\go</code>。 <code>GOPATH</code> 不能与您的 <code>Go</code> 安装路径相同。  在 <code>GOPATH</code> 下创建 bin 目录，<code>go</code> 编译后生成的二进制文件将存放在此目录。</td>
+</tr>
+<tr>
+<td><code>GO111MODULE</code></td>
+<td style="text-align:left">通过设置 <code>on</code>、<code>off</code>、<code>auto </code> 来控制是否开启 <code>Go modules</code>  特性。其中 <code>on</code> 代表开启 <code>GO modules</code>, 这会让 <code>go</code> 编译器忽略 <code>$GOPATH</code> 和 <code>vendor</code> 文件夹，只根据 <code>go.mod</code> 下载依赖。<code>off</code> 代表关闭 <code>go modules</code> 特性，这回让 <code>go</code> 编译器在  <code>$GOPATH </code> 和 <code>vendor</code> 目录来查找依赖关系，也就是继续使用 <code>GOPATH</code> 模式。而 <code>auto</code> 在 <code>go 1.14</code> 后的版本是默认值。设置为 <code>auto</code> 后，源码在 <code>$gopath/src</code>下，并且没有 <code>go.mod</code> 则关闭 <code>go modules</code>,其他情况都开启 <code>go modules</code>。</td>
+</tr>
+<tr>
+<td><code>goproxy</code></td>
+<td style="text-align:left">go包下载代理服务器。国内无法访问 <code>golang.org</code> 和 <code>Google</code> 等网站，但是在日常开发中使用的很多依赖包都要从 <code>Google</code> 上下载.为了解决加载依赖的问题，以便我们可以使用 <code>go get</code> 下载。   <code>direct 作用</code>：当 <code>go</code> 抓取目标包时，如果遇见了 <code>404</code> 错误，那么就会直接通过目标的源头获取，而不再通过设置的代理服务器下载。</td>
+</tr>
+<tr>
+<td><code>GOPRIVATE</code></td>
+<td style="text-align:left">指定不走代理的下载 <code>go</code> 包的域名，<code>go get</code> 正常通过代理服务器获取私有仓库（内部站点或者私有站点），代理服务器不可能访问到私有仓库，会出现 <code>404</code> 错误，设置 <code>GOPAIVATE</code> 变量，可以让以该域名开头的包不走代理，直接下载。 <code>go env -w GOPRIVATE = .gitlab.com,.gitee.com</code> 。</td>
+</tr>
+<tr>
+<td><code>GOSUMDB</code></td>
+<td style="text-align:left"><code>GOSUMDB</code> 的值是一个 <code>web</code> 服务器，默认是 <code>sum.golang.org</code>，该服务可以用来查询依赖包指定版本的哈希值，保证拉取到的模块版本数据未经过篡改。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>建议在日常开发中 <code>GO111MODULE</code> 设置为 <code>on</code>。</p>
+</li>
+<li>
+<p>使用 <code>go mod</code> 时， <code>$GOPATH</code> 虽说时无意义的，但是还是会把下载的依赖存在 <code>$GOPATH/pkg/mod</code> 中，也会把 <code>go intall</code>  安装的的二进制文件存放在 <code>$GOPATH/bin</code> 的目录中。</p>
+</li>
+<li>
+<p><code>$GOPATH/bin</code>、<code>$GOROOT/bin</code> 加入到 <code>PATH</code> 环境变量中，这样就可以直接使用 <code>go</code> 自带和 <code>go install </code>安装的命令。</p>
+</li>
+</ul>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hzw9527.github.io/tags/go_install/">go_install</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://hzw9527.github.io/posts/go/go_dir_design/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Go_dir_design</span>
+  </a>
+  <a class="next" href="https://hzw9527.github.io/posts/linux/ls/">
+    <span class="title">Next »</span>
+    <br>
+    <span>探索linux系统</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_install on twitter"
+        href="https://twitter.com/intent/tweet/?text=Go_install&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_install%2f&amp;hashtags=go_install">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_install on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_install%2f&amp;title=Go_install&amp;summary=Go_install&amp;source=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_install%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_install on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_install%2f&title=Go_install">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_install on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_install%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_install on whatsapp"
+        href="https://api.whatsapp.com/send?text=Go_install%20-%20https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_install%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_install on telegram"
+        href="https://telegram.me/share/url?text=Go_install&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_install%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://hzw9527.github.io/">hzw</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

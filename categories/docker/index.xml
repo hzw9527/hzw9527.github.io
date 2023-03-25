@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>docker on hzw</title>
+    <link>https://hzw9527.github.io/categories/docker/</link>
+    <description>Recent content in docker on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 25 Jun 2022 14:55:26 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker_wordpress</title>
+      <link>https://hzw9527.github.io/posts/docker/docker_wordpress/</link>
+      <pubDate>Sat, 25 Jun 2022 14:55:26 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/docker/docker_wordpress/</guid>
+      <description>&lt;p&gt;docker 搭建 wordpress&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

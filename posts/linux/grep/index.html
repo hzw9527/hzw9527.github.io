@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Grep | hzw</title>
+<meta name="keywords" content="grep">
+<meta name="description" content="I/O重定向">
+<meta name="author" content="Theme PaperMod">
+<link rel="canonical" href="https://hzw9527.github.io/posts/linux/grep/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.abbb4007d57c8d9f0a51f45f3d2e079cbeff25fc61fbcfb3135b95a5a6daf57c.css" integrity="sha256-q7tAB9V8jZ8KUfRfPS4HnL7/Jfxh&#43;8&#43;zE1uVpaba9Xw=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://hzw9527.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hzw9527.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hzw9527.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hzw9527.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hzw9527.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hzw9527.github.io/posts/linux/grep/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Grep" />
+<meta property="og:description" content="I/O重定向" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hzw9527.github.io/posts/linux/grep/" /><meta property="og:image" content="https://hzw9527.github.io/papermod-cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-10T22:51:49&#43;08:00" />
+<meta property="article:modified_time" content="2022-08-10T22:51:49&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hzw9527.github.io/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Grep"/>
+<meta name="twitter:description" content="I/O重定向"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hzw9527.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Grep",
+      "item": "https://hzw9527.github.io/posts/linux/grep/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Grep",
+  "name": "Grep",
+  "description": "I/O重定向\n",
+  "keywords": [
+    "grep"
+  ],
+  "articleBody": "I/O重定向\n1 标准输入，标准输出及标准错误 系统产生的结果分为两类：\n 程序本身运行产生的数据。 程序的状态和错误信息。  在万物皆文件的 linux 中，程序运行结果发送到名为 stdout (standard output) 的标准输出特殊文件,状态消息发送到名为 stdeer (standard error) 的特殊文件。默认情况下标准输出和标准错误和显示器屏幕相关联，不会保存为文件。\n一般来说输出显示在屏幕，输入来自键盘。i/o 重定向允许修改输出结果的去处和输入的来源。\n2 标准输出重定向 I/O 重定向可以重新定义标准输出的去处。标准输出重定向到其他文件而不是屏幕可以使用重定向操作符 ,后面加上文件名。\n$ ls -l  ls.output.log $ ls -l /usr/bin  ls.output.log 将输出的结果重定向输出到文件。\n  操作符: 重写目标文件。  命令发生错误\n$ ls -l /bin/usr  ls.output.log ls: cannot access '/bin/usr': No such file or directory $ ls -l -rw-rw-r-- 1 going going 0 Aug 9 23:21 ls.output.log /bin/usr 目录不存在，linux 默认会将错误信息发送到标准错误，我们只重定向了标准输出，没有重定向标准错误。错误信息默认输出都在屏幕上，而不是 ls.output.log 。\nls.output.log 文件是空的因为 重定向操作符  会重写目标文件，准备重写的时候出现了错误，出现错误停止写入操作，最终导致改文件内容被截断。\n基于上面这个特性，可以采用下面方式，只需要使用不加任何命令的重定向操作符，创建一个新的文件或者截断某个文件(清空文件内容)。\n$  ls.out.log 重定向标准输出追加到文件尾部，而不是覆盖，可以采用如下方式\n$ ls -l  ls.out.log 3 标准错误重定向 标准错误重定向没有专门的重定向操作符。要想重定向标准错误必须引用文件描述符。程序可以在任意经过编号的文件流上生成输出结果。\n虽然我们将前3个文件流称为标准输入，标准输出及标准错误，但是在 shell 内部分别用文件描述符 0、1、2 引用他们。shell 提供了描述符编号来重定向文件的写法。标准错误对应的文件描述符为2，可以用下列写法来重定向标准错误。\n$ ls -l /bin/usr 2 ls.error.log 文件描述符 2 紧靠在重定向操作符  前面，将标准错误重定向到 ls.error.log。\n4 标准错误和标准输入输出到同一文件 如果你想标准错误和标准输入输出到同一文件，必须要重定向标准输出和标准错误。\n$ ls -l /bin/usr  ls.out.log 2\u00261 上面的命令指定两次重定向，标准输出重定向到 ls.out.log,然后使用 2\u00261 将文件描述符 2(标准错误) 重定向到文件描述符 1(标准输出)。\n新版本的 bash 提供了另外一种方式:\n$ ls -l /bin/usr \u0026 ls.out.log \u0026 符号可以将标准输出和标准错误重定向到同一个文件中。\n如果你想标准输出和标准错误追加到单个文件中可以这样做。\n$ ls -l /bin/usr \u0026 ls.out.log 5 丢弃输出结果 有时候你并不需要命令的输出结果，希望将其丢弃掉。\n系统提供了一种解决办法： 将输出结果重定向到名为 /dev/null 的特殊文件。该文件是一个系统设备，通常称作位桶(bit bucket)，它的作用是能够接受输入而不做任何处理。 下面命令是可以丢弃产生的错误消息：\n$ ls -l /bini/usr 2 /dev/null 6 标准输入重定向 6.1 cat 拼接文件 cat命令可以读取一个或者多个文件内容并将内容复制到标准输出。\ncat 可以不分页显示文件内容，所以通常用于显示内容比较短的文件。因为可以一次读取多个文件，可以用于将多个文件内容拼接在一起。\n假如我们下载了一个电影，这个电影分为几个文件 movie.mpeg.001, movie.mpeg.002… movie.mpeg.099，这种场景下，我们可以使用 cat 将所有文件内容拼接在一起组合还原。\n$ cat movie.mpeg.o*  movie.mpeg 通配符会按照顺序扩展，cat 会有序的将文件进行拼接。\n6.2 利用 cat 创建短文本文件 上面我们说过 cat 是读取一个或者多个文件，如果没有指定文件会怎么样？\n$ cat 这种情况下，如果没有为 cat 指定任何参数，它就从标准输入中读取。又因为标准输入默认和键盘关联,所以 cat 一直在等待我们从键盘输入。\n$ cat 123 123 在缺少文件名参数的情况下，cat 默认会将标准输入复制到标准输出，所以看到了重复显示的文本行。ctrl-D 组合键告诉 cat 命令已经到达标准输入的末尾。\n利用这种行为可以创建文本较少的文件。\n$ cat  ls.out.log hello [going@dev shell-study]$ cat ls.out.log hello 输入 hello,然后 enter , 接着 ctrl -D 。\n总之，cat 可以从键盘接受标准输入。\n当然文件也可以作为标准输入。\n$ cat hello 7 管道 shell 的管道利用了命令能够从标准输入读取数据并将数据发送到标准输出的能力。通过管道可以将一个命令的标准输出传给另一个命令的标准输入。\ncommand1 | command2 less 就是一个可以使用标准输入的命令：\n$ ls -l /usr/bin | less ls -l /usr/bin 的标准输出作为 less 的标准输入，less 可以使用这个标准输入。对于任何能产生标准输出的命令，都可以用这个方式检查其输出结果。\n管道可以用来执行复杂的数据操作。我们也可以把多个命令组合在一起形成管道。这种方式中用到的命令通常被称为过滤器。\n7.1 排序列表 $ ls /bin /usr/bin | sort | less 上面的命令 ls 的输出结果包含了两个输出结果，分别对应两个目录，默认的输出结果会分别显示两个目录的输出结果，管道中加入 sort 就可以修改命令的输出结果，生成单个有序列表。\n重定向的操作符是将命令和文件连接在一起，管道操作符将一个命令的输出结果与另一个命令的输出结果连接在一起。\n7.2 uniq 命令 uniq 意思是独特的。uniq命令可以从标准输入或者单个文件名参数中获取有序的数据列表。默认删除所有的重复行。\n$ ls /bin /usr/bin | sort | less /bin 和 /usr/bin 目录可能存在同名的应用程序，上面命令的输出结果可能会有重复行，去掉重复行。\n$ ls /bin /usr/bin | sort | uniq | less 这个命令可以删除所有的重复行。\n如果你想查看输出结果有哪些重复行，可以这么做\n$ ls /bin /usr/bin | sort | uniq -d | less 7.3 输出与模式匹配的行 grep 命令可用于在文件中查找文本，功能十分强大。grep 能够匹配非常复杂的模式。\n下面的命令可以从程序列表中找到名称中包含单词 zip 的所有文件。\n$ ls /bin /usr/bin | sort | uniq -d | grep zip bunzip2 bzip2 bzip2recover funzip gpg-zip gunzip grep 选项：\n -i : grep 搜索时忽略字母大小写 -v : grep 只输出不匹配指定模式的行。  7.4 head/tail - 输出文件的开头/结尾部分 有时候你想要的不是命令的全部输出结果,只是前几行或者后几行。head 命令和 tail 默认能够输出文件的前10行和最后10行，当前行数你也可以通过 -n 调整\n查看文件的前 5 行\n$ head -n 5 Makefile 查看文件的最后 5 行\n$ tail -n 5 Makefile 上面两个命令都可以用于管道之中\n$ ls /usr/bin | tail -n 5 tail 命令还有一个功能就是可以实时监测文件的变化，通常用于同步观察日志被写入的过程\n$ tail -f log.out 通过 -f 选项，tail 命令会持续观察该文件。ctrl-c 组合键可以终止。\n7.5 读取标准输入并将输出结果写入标准输出和文件 tee 命令从标准输入读取内容然后将其复制到标准输出（允许数据沿着管道继续流动）和其他文件中。\n$ ls /usr/bin | tee ls.txt | grep zip bunzip2 bzip2 bzip2recover funzip gpg-zip gunzip gzip unzip 在管道之前加入 tee 命令，将整个目录列表保存在 ls.txt，然后复制内容继续流动，输出 grep 模式匹配结果。\n",
+  "wordCount" : "416",
+  "inLanguage": "en",
+  "datePublished": "2022-08-10T22:51:49+08:00",
+  "dateModified": "2022-08-10T22:51:49+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Theme PaperMod"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hzw9527.github.io/posts/linux/grep/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hzw",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hzw9527.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hzw9527.github.io/" accesskey="h" title="hzw (Alt + H)">hzw</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fr/" title="French"
+                            aria-label=":fr:">🇫🇷</a>
+                    </li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fa/" title="Fa"
+                            aria-label="Fa">Fa</a>
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hzw9527.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://hzw9527.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://hzw9527.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Grep
+    </h1>
+    <div class="post-meta"><span title='2022-08-10 22:51:49 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href="https://github.com/hzw9527.github.io/tree/exampleSite/content/posts/linux/grep.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-%e6%a0%87%e5%87%86%e8%be%93%e5%85%a5%e6%a0%87%e5%87%86%e8%be%93%e5%87%ba%e5%8f%8a%e6%a0%87%e5%87%86%e9%94%99%e8%af%af" aria-label="1 标准输入，标准输出及标准错误">1 标准输入，标准输出及标准错误</a></li>
+                <li>
+                    <a href="#2-%e6%a0%87%e5%87%86%e8%be%93%e5%87%ba%e9%87%8d%e5%ae%9a%e5%90%91" aria-label="2 标准输出重定向">2 标准输出重定向</a></li>
+                <li>
+                    <a href="#3-%e6%a0%87%e5%87%86%e9%94%99%e8%af%af%e9%87%8d%e5%ae%9a%e5%90%91" aria-label="3 标准错误重定向">3 标准错误重定向</a></li>
+                <li>
+                    <a href="#4-%e6%a0%87%e5%87%86%e9%94%99%e8%af%af%e5%92%8c%e6%a0%87%e5%87%86%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba%e5%88%b0%e5%90%8c%e4%b8%80%e6%96%87%e4%bb%b6" aria-label="4 标准错误和标准输入输出到同一文件">4 标准错误和标准输入输出到同一文件</a></li>
+                <li>
+                    <a href="#5-%e4%b8%a2%e5%bc%83%e8%be%93%e5%87%ba%e7%bb%93%e6%9e%9c" aria-label="5 丢弃输出结果">5 丢弃输出结果</a></li>
+                <li>
+                    <a href="#6-%e6%a0%87%e5%87%86%e8%be%93%e5%85%a5%e9%87%8d%e5%ae%9a%e5%90%91" aria-label="6 标准输入重定向">6 标准输入重定向</a><ul>
+                        
+                <li>
+                    <a href="#61-cat-%e6%8b%bc%e6%8e%a5%e6%96%87%e4%bb%b6" aria-label="6.1 cat 拼接文件">6.1 cat 拼接文件</a></li>
+                <li>
+                    <a href="#62-%e5%88%a9%e7%94%a8-cat-%e5%88%9b%e5%bb%ba%e7%9f%ad%e6%96%87%e6%9c%ac%e6%96%87%e4%bb%b6" aria-label="6.2 利用 cat 创建短文本文件">6.2 利用 cat 创建短文本文件</a></li></ul>
+                </li>
+                <li>
+                    <a href="#7-%e7%ae%a1%e9%81%93" aria-label="7 管道">7 管道</a><ul>
+                        
+                <li>
+                    <a href="#71-%e6%8e%92%e5%ba%8f%e5%88%97%e8%a1%a8" aria-label="7.1 排序列表">7.1 排序列表</a></li>
+                <li>
+                    <a href="#72-uniq-%e5%91%bd%e4%bb%a4" aria-label="7.2 uniq 命令">7.2 uniq 命令</a></li>
+                <li>
+                    <a href="#73-%e8%be%93%e5%87%ba%e4%b8%8e%e6%a8%a1%e5%bc%8f%e5%8c%b9%e9%85%8d%e7%9a%84%e8%a1%8c" aria-label="7.3 输出与模式匹配的行">7.3 输出与模式匹配的行</a></li>
+                <li>
+                    <a href="#74-headtail---%e8%be%93%e5%87%ba%e6%96%87%e4%bb%b6%e7%9a%84%e5%bc%80%e5%a4%b4%e7%bb%93%e5%b0%be%e9%83%a8%e5%88%86" aria-label="7.4 head/tail - 输出文件的开头/结尾部分">7.4 head/tail - 输出文件的开头/结尾部分</a></li>
+                <li>
+                    <a href="#75-%e8%af%bb%e5%8f%96%e6%a0%87%e5%87%86%e8%be%93%e5%85%a5%e5%b9%b6%e5%b0%86%e8%be%93%e5%87%ba%e7%bb%93%e6%9e%9c%e5%86%99%e5%85%a5%e6%a0%87%e5%87%86%e8%be%93%e5%87%ba%e5%92%8c%e6%96%87%e4%bb%b6" aria-label="7.5 读取标准输入并将输出结果写入标准输出和文件">7.5 读取标准输入并将输出结果写入标准输出和文件</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>I/O重定向</p>
+<h2 id="1-标准输入标准输出及标准错误">1 标准输入，标准输出及标准错误<a hidden class="anchor" aria-hidden="true" href="#1-标准输入标准输出及标准错误">#</a></h2>
+<p>系统产生的结果分为两类：</p>
+<ul>
+<li>程序本身运行产生的数据。</li>
+<li>程序的状态和错误信息。</li>
+</ul>
+<p>在万物皆文件的 linux 中，程序运行结果发送到名为 stdout (standard output) 的标准输出特殊文件,状态消息发送到名为 stdeer (standard error) 的特殊文件。默认情况下标准输出和标准错误和显示器屏幕相关联，不会保存为文件。</p>
+<p>一般来说输出显示在屏幕，输入来自键盘。i/o 重定向允许修改输出结果的去处和输入的来源。</p>
+<h2 id="2-标准输出重定向">2 标准输出重定向<a hidden class="anchor" aria-hidden="true" href="#2-标准输出重定向">#</a></h2>
+<p>I/O 重定向可以重新定义标准输出的去处。标准输出重定向到其他文件而不是屏幕可以使用重定向操作符 <code>&gt;</code>,后面加上文件名。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l &gt; ls.output.log
+</span></span><span class="line"><span class="cl">$ ls -l /usr/bin &gt; ls.output.log
+</span></span></code></pre></div><p>将输出的结果重定向输出到文件。</p>
+<ul>
+<li><code>&gt; 操作符</code>: 重写目标文件。</li>
+</ul>
+<p><strong>命令发生错误</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l /bin/usr &gt; ls.output.log 
+</span></span><span class="line"><span class="cl">ls: cannot access <span class="s1">&#39;/bin/usr&#39;</span>: No such file or directory
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ ls -l
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> going going    <span class="m">0</span> Aug  <span class="m">9</span> 23:21 ls.output.log
+</span></span></code></pre></div><p><code>/bin/usr</code> 目录不存在，<code>linux</code>  默认会将错误信息发送到标准错误，我们只重定向了标准输出，没有重定向标准错误。错误信息默认输出都在屏幕上，而不是 <code>ls.output.log</code> 。</p>
+<p><code>ls.output.log</code> 文件是空的因为 重定向操作符 <code>&gt;</code> 会重写目标文件，准备重写的时候出现了错误，出现错误停止写入操作，最终导致改文件内容被截断。</p>
+<p>基于上面这个特性，可以采用下面方式，只需要使用不加任何命令的重定向操作符，创建一个新的文件或者截断某个文件(清空文件内容)。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ &gt; ls.out.log 
+</span></span></code></pre></div><p>重定向标准输出追加到文件尾部，而不是覆盖，可以采用如下方式</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l &gt;&gt; ls.out.log 
+</span></span></code></pre></div><h2 id="3-标准错误重定向">3 标准错误重定向<a hidden class="anchor" aria-hidden="true" href="#3-标准错误重定向">#</a></h2>
+<p>标准错误重定向没有专门的重定向操作符。要想重定向标准错误必须引用文件描述符。程序可以在任意经过编号的文件流上生成输出结果。</p>
+<p>虽然我们将前3个文件流称为标准输入，标准输出及标准错误，但是在 shell 内部分别用文件描述符 0、1、2 引用他们。shell 提供了描述符编号来重定向文件的写法。标准错误对应的文件描述符为2，可以用下列写法来重定向标准错误。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l /bin/usr 2&gt; ls.error.log 
+</span></span></code></pre></div><p>文件描述符 2 紧靠在重定向操作符 &gt; 前面，将标准错误重定向到 <code>ls.error.log</code>。</p>
+<h2 id="4-标准错误和标准输入输出到同一文件">4 标准错误和标准输入输出到同一文件<a hidden class="anchor" aria-hidden="true" href="#4-标准错误和标准输入输出到同一文件">#</a></h2>
+<p>如果你想标准错误和标准输入输出到同一文件，必须要重定向标准输出和标准错误。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l /bin/usr &gt; ls.out.log 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span></code></pre></div><p>上面的命令指定两次重定向，标准输出重定向到 <code>ls.out.log</code>,然后使用 <code>2&gt;&amp;1</code> 将文件描述符 2(标准错误) 重定向到文件描述符 1(标准输出)。</p>
+<p>新版本的 bash 提供了另外一种方式:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l /bin/usr <span class="p">&amp;</span>&gt; ls.out.log 
+</span></span></code></pre></div><p><code>&amp;&gt;</code> 符号可以将标准输出和标准错误重定向到同一个文件中。</p>
+<p>如果你想标准输出和标准错误追加到单个文件中可以这样做。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l /bin/usr <span class="p">&amp;</span>&gt;&gt; ls.out.log 
+</span></span></code></pre></div><h2 id="5-丢弃输出结果">5 丢弃输出结果<a hidden class="anchor" aria-hidden="true" href="#5-丢弃输出结果">#</a></h2>
+<p>有时候你并不需要命令的输出结果，希望将其丢弃掉。</p>
+<p>系统提供了一种解决办法： 将输出结果重定向到名为 /dev/null 的特殊文件。该文件是一个系统设备，通常称作位桶(bit bucket)，它的作用是能够接受输入而不做任何处理。
+下面命令是可以丢弃产生的错误消息：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l /bini/usr 2&gt; /dev/null 
+</span></span></code></pre></div><h2 id="6-标准输入重定向">6 标准输入重定向<a hidden class="anchor" aria-hidden="true" href="#6-标准输入重定向">#</a></h2>
+<h3 id="61-cat-拼接文件">6.1 cat 拼接文件<a hidden class="anchor" aria-hidden="true" href="#61-cat-拼接文件">#</a></h3>
+<p>cat命令可以读取一个或者多个文件内容并将内容复制到标准输出。</p>
+<p>cat 可以不分页显示文件内容，所以通常用于显示内容比较短的文件。因为可以一次读取多个文件，可以用于将多个文件内容拼接在一起。</p>
+<p>假如我们下载了一个电影，这个电影分为几个文件 movie.mpeg.001, movie.mpeg.002&hellip; movie.mpeg.099，这种场景下，我们可以使用 cat 将所有文件内容拼接在一起组合还原。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat movie.mpeg.o* &gt; movie.mpeg
+</span></span></code></pre></div><p>通配符会按照顺序扩展，cat 会有序的将文件进行拼接。</p>
+<h3 id="62-利用-cat-创建短文本文件">6.2 利用 cat 创建短文本文件<a hidden class="anchor" aria-hidden="true" href="#62-利用-cat-创建短文本文件">#</a></h3>
+<p>上面我们说过 cat 是读取一个或者多个文件，如果没有指定文件会怎么样？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat 
+</span></span></code></pre></div><p>这种情况下，如果没有为 cat 指定任何参数，它就从标准输入中读取。又因为标准输入默认和键盘关联,所以 cat 一直在等待我们从键盘输入。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat
+</span></span><span class="line"><span class="cl"><span class="m">123</span>
+</span></span><span class="line"><span class="cl"><span class="m">123</span>
+</span></span></code></pre></div><p>在缺少文件名参数的情况下，cat 默认会将标准输入复制到标准输出，所以看到了重复显示的文本行。ctrl-D 组合键告诉 cat 命令已经到达标准输入的末尾。</p>
+<p>利用这种行为可以创建文本较少的文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat &gt; ls.out.log
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev shell-study<span class="o">]</span>$ cat ls.out.log 
+</span></span><span class="line"><span class="cl">hello
+</span></span></code></pre></div><p>输入 hello,然后 enter , 接着 ctrl -D 。</p>
+<p>总之，cat 可以从键盘接受标准输入。</p>
+<p>当然文件也可以作为标准输入。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat &lt; ls.out.log 
+</span></span><span class="line"><span class="cl">hello
+</span></span></code></pre></div><h2 id="7-管道">7 管道<a hidden class="anchor" aria-hidden="true" href="#7-管道">#</a></h2>
+<p>shell 的管道利用了命令能够从标准输入读取数据并将数据发送到标准输出的能力。通过管道可以将一个命令的标准输出传给另一个命令的标准输入。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">command1 <span class="p">|</span> command2
+</span></span></code></pre></div><p>less 就是一个可以使用标准输入的命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l /usr/bin <span class="p">|</span> less
+</span></span></code></pre></div><p>ls -l /usr/bin 的标准输出作为 less 的标准输入，less 可以使用这个标准输入。对于任何能产生标准输出的命令，都可以用这个方式检查其输出结果。</p>
+<p>管道可以用来执行复杂的数据操作。我们也可以把多个命令组合在一起形成管道。这种方式中用到的命令通常被称为过滤器。</p>
+<h3 id="71-排序列表">7.1 排序列表<a hidden class="anchor" aria-hidden="true" href="#71-排序列表">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls /bin /usr/bin <span class="p">|</span> sort <span class="p">|</span> less
+</span></span></code></pre></div><p>上面的命令 ls 的输出结果包含了两个输出结果，分别对应两个目录，默认的输出结果会分别显示两个目录的输出结果，管道中加入 sort 就可以修改命令的输出结果，生成单个有序列表。</p>
+<p>重定向的操作符是将命令和文件连接在一起，管道操作符将一个命令的输出结果与另一个命令的输出结果连接在一起。</p>
+<h3 id="72-uniq-命令">7.2 uniq 命令<a hidden class="anchor" aria-hidden="true" href="#72-uniq-命令">#</a></h3>
+<p>uniq 意思是独特的。uniq命令可以从标准输入或者单个文件名参数中获取有序的数据列表。默认删除所有的重复行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls /bin /usr/bin <span class="p">|</span> sort <span class="p">|</span> less
+</span></span></code></pre></div><p>/bin 和 /usr/bin 目录可能存在同名的应用程序，上面命令的输出结果可能会有重复行，去掉重复行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls /bin /usr/bin <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">|</span> less
+</span></span></code></pre></div><p>这个命令可以删除所有的重复行。</p>
+<p>如果你想查看输出结果有哪些重复行，可以这么做</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls /bin /usr/bin <span class="p">|</span> sort <span class="p">|</span> uniq -d <span class="p">|</span> less
+</span></span></code></pre></div><h3 id="73-输出与模式匹配的行">7.3 输出与模式匹配的行<a hidden class="anchor" aria-hidden="true" href="#73-输出与模式匹配的行">#</a></h3>
+<p>grep 命令可用于在文件中查找文本，功能十分强大。grep 能够匹配非常复杂的模式。</p>
+<p>下面的命令可以从程序列表中找到名称中包含单词 zip 的所有文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$  ls /bin /usr/bin <span class="p">|</span> sort <span class="p">|</span> uniq -d <span class="p">|</span> grep zip
+</span></span><span class="line"><span class="cl">bunzip2
+</span></span><span class="line"><span class="cl">bzip2
+</span></span><span class="line"><span class="cl">bzip2recover
+</span></span><span class="line"><span class="cl">funzip
+</span></span><span class="line"><span class="cl">gpg-zip
+</span></span><span class="line"><span class="cl">gunzip
+</span></span></code></pre></div><p>grep 选项：</p>
+<ul>
+<li><code>-i</code> : grep 搜索时忽略字母大小写</li>
+<li><code>-v</code> : grep 只输出不匹配指定模式的行。</li>
+</ul>
+<h3 id="74-headtail---输出文件的开头结尾部分">7.4 head/tail - 输出文件的开头/结尾部分<a hidden class="anchor" aria-hidden="true" href="#74-headtail---输出文件的开头结尾部分">#</a></h3>
+<p>有时候你想要的不是命令的全部输出结果,只是前几行或者后几行。head 命令和 tail 默认能够输出文件的前10行和最后10行，当前行数你也可以通过 -n 调整</p>
+<p>查看文件的前 5 行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ head  -n <span class="m">5</span>  Makefile
+</span></span></code></pre></div><p>查看文件的最后 5 行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tail  -n <span class="m">5</span>  Makefile
+</span></span></code></pre></div><p>上面两个命令都可以用于管道之中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls /usr/bin  <span class="p">|</span> tail -n <span class="m">5</span>
+</span></span></code></pre></div><p>tail 命令还有一个功能就是可以实时监测文件的变化，通常用于同步观察日志被写入的过程</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tail -f log.out
+</span></span></code></pre></div><p>通过 -f 选项，tail 命令会持续观察该文件。ctrl-c 组合键可以终止。</p>
+<h3 id="75-读取标准输入并将输出结果写入标准输出和文件">7.5 读取标准输入并将输出结果写入标准输出和文件<a hidden class="anchor" aria-hidden="true" href="#75-读取标准输入并将输出结果写入标准输出和文件">#</a></h3>
+<p>tee 命令从标准输入读取内容然后将其复制到标准输出（允许数据沿着管道继续流动）和其他文件中。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls /usr/bin <span class="p">|</span> tee ls.txt <span class="p">|</span> grep zip
+</span></span><span class="line"><span class="cl">bunzip2
+</span></span><span class="line"><span class="cl">bzip2
+</span></span><span class="line"><span class="cl">bzip2recover
+</span></span><span class="line"><span class="cl">funzip
+</span></span><span class="line"><span class="cl">gpg-zip
+</span></span><span class="line"><span class="cl">gunzip
+</span></span><span class="line"><span class="cl">gzip
+</span></span><span class="line"><span class="cl">unzip
+</span></span></code></pre></div><p>在管道之前加入 tee 命令，将整个目录列表保存在 ls.txt，然后复制内容继续流动，输出 grep 模式匹配结果。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hzw9527.github.io/tags/grep/">grep</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://hzw9527.github.io/posts/vim/vim%E5%91%BD%E4%BB%A4%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%9A%84%E6%96%B9%E5%BC%8F/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Vim命令解决问题的方式</span>
+  </a>
+  <a class="next" href="https://hzw9527.github.io/posts/linux/alias/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Alias</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Grep on twitter"
+        href="https://twitter.com/intent/tweet/?text=Grep&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fgrep%2f&amp;hashtags=grep">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Grep on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fgrep%2f&amp;title=Grep&amp;summary=Grep&amp;source=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fgrep%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Grep on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fgrep%2f&title=Grep">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Grep on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fgrep%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Grep on whatsapp"
+        href="https://api.whatsapp.com/send?text=Grep%20-%20https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fgrep%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Grep on telegram"
+        href="https://telegram.me/share/url?text=Grep&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fgrep%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://hzw9527.github.io/">hzw</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>alias on hzw</title>
+    <link>https://hzw9527.github.io/tags/alias/</link>
+    <description>Recent content in alias on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 06 Aug 2022 16:24:34 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/alias/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Alias</title>
+      <link>https://hzw9527.github.io/posts/linux/alias/</link>
+      <pubDate>Sat, 06 Aug 2022 16:24:34 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/alias/</guid>
+      <description>&lt;p&gt;和命令打交道&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

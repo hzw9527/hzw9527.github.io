@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>flag on hzw</title>
+    <link>https://hzw9527.github.io/tags/flag/</link>
+    <description>Recent content in flag on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 11 Dec 2022 22:06:43 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/flag/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>flag</title>
+      <link>https://hzw9527.github.io/posts/go/flag/</link>
+      <pubDate>Sun, 11 Dec 2022 22:06:43 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/flag/</guid>
+      <description>&lt;p&gt;官方包 flag 介绍&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

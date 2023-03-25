@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>计算机 on hzw</title>
+    <link>https://hzw9527.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
+    <description>Recent content in 计算机 on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 11 Jul 2022 22:48:41 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>file navigation</title>
+      <link>https://hzw9527.github.io/posts/linux/file_navigation/</link>
+      <pubDate>Mon, 11 Jul 2022 22:48:41 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/file_navigation/</guid>
+      <description>&lt;p&gt;linux 文件系统中导航。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell</title>
+      <link>https://hzw9527.github.io/posts/linux/shell/</link>
+      <pubDate>Sat, 09 Jul 2022 09:33:41 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/shell/</guid>
+      <description>&lt;p&gt;什么是 shell&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>commit_specification on hzw</title>
+    <link>https://hzw9527.github.io/tags/commit_specification/</link>
+    <description>Recent content in commit_specification on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 15 Jun 2022 22:44:28 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/commit_specification/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Commit_specification</title>
+      <link>https://hzw9527.github.io/posts/git/commit_specification/</link>
+      <pubDate>Wed, 15 Jun 2022 22:44:28 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/git/commit_specification/</guid>
+      <description>&lt;p&gt;一文学习 git commit 规范&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>blog on hzw</title>
+    <link>https://hzw9527.github.io/categories/blog/</link>
+    <description>Recent content in blog on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 26 May 2022 22:35:30 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog_install</title>
+      <link>https://hzw9527.github.io/posts/blog/blog_install/</link>
+      <pubDate>Thu, 26 May 2022 22:35:30 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/blog/blog_install/</guid>
+      <description>1 安装之前的准备工作  需要安装好 hugo 需要安装好对应的 go 版本，新下载的 hugo 程序可能依赖对应的 go 版本  2 搭建博客 这里以主题 papermod 为例
+2.1 创建你的博客 $ hugo new site blog 2.2 使用 hugo 主题 $ cd blog $ git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1 2.3 修改配置文件 切换到博客根目录， 删除 toml 文件，创建 config.yaml 文件，内容如下
+baseURL: &amp;#34;https://examplesite.com/&amp;#34; title: ExampleSite paginate: 5 theme: PaperMod enableRobotsTXT: true buildDrafts: false buildFuture: false buildExpired: false googleAnalytics: UA-123-45 minify: disableXML: true minifyOutput: true params: env: production # to enable google analytics, opengraph, twitter-cards and schema.</description>
+    </item>
+    
+  </channel>
+</rss>

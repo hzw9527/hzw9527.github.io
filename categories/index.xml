@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Categories on hzw</title>
+    <link>https://hzw9527.github.io/categories/</link>
+    <description>Recent content in Categories on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 25 Feb 2023 17:50:09 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go</title>
+      <link>https://hzw9527.github.io/categories/go/</link>
+      <pubDate>Sat, 25 Feb 2023 17:50:09 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://hzw9527.github.io/categories/linux/</link>
+      <pubDate>Thu, 10 Nov 2022 22:48:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>makefile</title>
+      <link>https://hzw9527.github.io/categories/makefile/</link>
+      <pubDate>Thu, 20 Oct 2022 22:06:05 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/makefile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>goland</title>
+      <link>https://hzw9527.github.io/categories/goland/</link>
+      <pubDate>Sat, 03 Sep 2022 11:47:15 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/goland/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://hzw9527.github.io/categories/vim/</link>
+      <pubDate>Sat, 20 Aug 2022 12:35:59 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>计算机</title>
+      <link>https://hzw9527.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
+      <pubDate>Mon, 11 Jul 2022 22:48:41 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法</title>
+      <link>https://hzw9527.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sun, 10 Jul 2022 23:27:18 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>技术</title>
+      <link>https://hzw9527.github.io/categories/%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Mon, 27 Jun 2022 23:16:27 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/%E6%8A%80%E6%9C%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://hzw9527.github.io/categories/docker/</link>
+      <pubDate>Sat, 25 Jun 2022 14:55:26 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://hzw9527.github.io/categories/git/</link>
+      <pubDate>Wed, 15 Jun 2022 22:44:28 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>https://hzw9527.github.io/categories/tools/</link>
+      <pubDate>Mon, 13 Jun 2022 21:05:43 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>设计模式</title>
+      <link>https://hzw9527.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 06 Jun 2022 21:39:27 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://hzw9527.github.io/categories/blog/</link>
+      <pubDate>Thu, 26 May 2022 22:35:30 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>syntax</title>
+      <link>https://hzw9527.github.io/categories/syntax/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/syntax/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>themes</title>
+      <link>https://hzw9527.github.io/categories/themes/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hzw9527.github.io/categories/themes/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

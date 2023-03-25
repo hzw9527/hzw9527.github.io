@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>vim on hzw</title>
+    <link>https://hzw9527.github.io/categories/vim/</link>
+    <description>Recent content in vim on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 20 Aug 2022 12:35:59 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vim命令解决问题的方式</title>
+      <link>https://hzw9527.github.io/posts/vim/vim%E5%91%BD%E4%BB%A4%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%9A%84%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Sat, 20 Aug 2022 12:35:59 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/vim/vim%E5%91%BD%E4%BB%A4%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%9A%84%E6%96%B9%E5%BC%8F/</guid>
+      <description>&lt;p&gt;vim 对重复操作进行优化，会记录我们最近的操作。一次按键就能重复上次的修改。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

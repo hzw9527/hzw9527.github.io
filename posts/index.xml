@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on hzw</title>
+    <link>https://hzw9527.github.io/posts/</link>
+    <description>Recent content in Posts on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 25 Feb 2023 17:50:09 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pflag使用</title>
+      <link>https://hzw9527.github.io/posts/go/pflag/</link>
+      <pubDate>Sat, 25 Feb 2023 17:50:09 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/pflag/</guid>
+      <description>&lt;p&gt;使用 pflag 包来解析命令行参数&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>flag</title>
+      <link>https://hzw9527.github.io/posts/go/flag/</link>
+      <pubDate>Sun, 11 Dec 2022 22:06:43 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/flag/</guid>
+      <description>&lt;p&gt;官方包 flag 介绍&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>design_pattern</title>
+      <link>https://hzw9527.github.io/posts/go/go_common_design_pattern/</link>
+      <pubDate>Sun, 04 Dec 2022 16:53:14 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_common_design_pattern/</guid>
+      <description>&lt;p&gt;go 常用的设计模式&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>linux 环境变量</title>
+      <link>https://hzw9527.github.io/posts/linux/env/</link>
+      <pubDate>Thu, 10 Nov 2022 22:48:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/env/</guid>
+      <description>&lt;p&gt;shell 在会话期间维护着成为环境的大量信息&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>linux 进程</title>
+      <link>https://hzw9527.github.io/posts/linux/ps/</link>
+      <pubDate>Tue, 08 Nov 2022 22:34:41 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/ps/</guid>
+      <description>&lt;p&gt;linux 进程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Makefile Core Syntax</title>
+      <link>https://hzw9527.github.io/posts/makefile/make-core-syntax/</link>
+      <pubDate>Thu, 20 Oct 2022 22:06:05 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/makefile/make-core-syntax/</guid>
+      <description>&lt;p&gt;熟练掌握 Makefile 语法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go_modules</title>
+      <link>https://hzw9527.github.io/posts/go/go_modules/</link>
+      <pubDate>Wed, 21 Sep 2022 23:17:56 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_modules/</guid>
+      <description>&lt;p&gt;Go Modules依赖包管理&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>linux 权限</title>
+      <link>https://hzw9527.github.io/posts/linux/permission/</link>
+      <pubDate>Wed, 07 Sep 2022 22:50:13 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/permission/</guid>
+      <description>&lt;p&gt;linux 权限&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>高级键盘技巧</title>
+      <link>https://hzw9527.github.io/posts/linux/history/</link>
+      <pubDate>Mon, 05 Sep 2022 22:57:30 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/history/</guid>
+      <description>&lt;p&gt;命令行的目的就是用最少的操作完成最多的工作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>goland quick code</title>
+      <link>https://hzw9527.github.io/posts/goland/code2/</link>
+      <pubDate>Sat, 03 Sep 2022 11:47:15 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/goland/code2/</guid>
+      <description>&lt;p&gt;goland 快捷键&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>goland Plugin</title>
+      <link>https://hzw9527.github.io/posts/goland/plugin/</link>
+      <pubDate>Sat, 03 Sep 2022 11:45:29 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/goland/plugin/</guid>
+      <description>&lt;p&gt;goland 插件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>goland 快捷键</title>
+      <link>https://hzw9527.github.io/posts/goland/hotkey/</link>
+      <pubDate>Sat, 03 Sep 2022 11:20:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/goland/hotkey/</guid>
+      <description>&lt;p&gt;goland 快捷键&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vim命令解决问题的方式</title>
+      <link>https://hzw9527.github.io/posts/vim/vim%E5%91%BD%E4%BB%A4%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%9A%84%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Sat, 20 Aug 2022 12:35:59 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/vim/vim%E5%91%BD%E4%BB%A4%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%9A%84%E6%96%B9%E5%BC%8F/</guid>
+      <description>&lt;p&gt;vim 对重复操作进行优化，会记录我们最近的操作。一次按键就能重复上次的修改。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Grep</title>
+      <link>https://hzw9527.github.io/posts/linux/grep/</link>
+      <pubDate>Wed, 10 Aug 2022 22:51:49 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/grep/</guid>
+      <description>&lt;p&gt;I/O重定向&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Alias</title>
+      <link>https://hzw9527.github.io/posts/linux/alias/</link>
+      <pubDate>Sat, 06 Aug 2022 16:24:34 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/alias/</guid>
+      <description>&lt;p&gt;和命令打交道&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux File</title>
+      <link>https://hzw9527.github.io/posts/linux/file/</link>
+      <pubDate>Tue, 02 Aug 2022 23:06:06 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/file/</guid>
+      <description>&lt;p&gt;操作文件和目录。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gorm</title>
+      <link>https://hzw9527.github.io/posts/go/gorm/</link>
+      <pubDate>Thu, 21 Jul 2022 22:47:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/gorm/</guid>
+      <description>&lt;p&gt;CURD 神器 GORM 包介绍及实战&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go_dir_design</title>
+      <link>https://hzw9527.github.io/posts/go/go_dir_design/</link>
+      <pubDate>Sat, 16 Jul 2022 23:37:16 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_dir_design/</guid>
+      <description>&lt;p&gt;如何规范go项目目录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go_install</title>
+      <link>https://hzw9527.github.io/posts/go/go_install/</link>
+      <pubDate>Sat, 16 Jul 2022 08:51:45 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_install/</guid>
+      <description>&lt;p&gt;go 安装教程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>探索linux系统</title>
+      <link>https://hzw9527.github.io/posts/linux/ls/</link>
+      <pubDate>Wed, 13 Jul 2022 22:39:44 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/ls/</guid>
+      <description>&lt;p&gt;linux查看文件的几个命令。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Timer</title>
+      <link>https://hzw9527.github.io/posts/go/timer/</link>
+      <pubDate>Tue, 12 Jul 2022 22:57:34 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/timer/</guid>
+      <description>&lt;p&gt;go 的简单的定时器&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>file navigation</title>
+      <link>https://hzw9527.github.io/posts/linux/file_navigation/</link>
+      <pubDate>Mon, 11 Jul 2022 22:48:41 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/file_navigation/</guid>
+      <description>&lt;p&gt;linux 文件系统中导航。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Complexity</title>
+      <link>https://hzw9527.github.io/posts/argo/complexity/</link>
+      <pubDate>Sun, 10 Jul 2022 23:27:18 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/argo/complexity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Log_use</title>
+      <link>https://hzw9527.github.io/posts/go/log_use/</link>
+      <pubDate>Sat, 09 Jul 2022 23:11:08 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/log_use/</guid>
+      <description>&lt;p&gt;自定义 log 的使用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell</title>
+      <link>https://hzw9527.github.io/posts/linux/shell/</link>
+      <pubDate>Sat, 09 Jul 2022 09:33:41 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/linux/shell/</guid>
+      <description>&lt;p&gt;什么是 shell&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker_introduction</title>
+      <link>https://hzw9527.github.io/posts/docker/docker_introduction/</link>
+      <pubDate>Mon, 27 Jun 2022 23:16:27 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/docker/docker_introduction/</guid>
+      <description>&lt;p&gt;docker 简介。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker_wordpress</title>
+      <link>https://hzw9527.github.io/posts/docker/docker_wordpress/</link>
+      <pubDate>Sat, 25 Jun 2022 14:55:26 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/docker/docker_wordpress/</guid>
+      <description>&lt;p&gt;docker 搭建 wordpress&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Commit_specification</title>
+      <link>https://hzw9527.github.io/posts/git/commit_specification/</link>
+      <pubDate>Wed, 15 Jun 2022 22:44:28 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/git/commit_specification/</guid>
+      <description>&lt;p&gt;一文学习 git commit 规范&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gitignore</title>
+      <link>https://hzw9527.github.io/posts/git/gitignore/</link>
+      <pubDate>Wed, 15 Jun 2022 22:28:25 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/git/gitignore/</guid>
+      <description>&lt;p&gt;gitignore 规则&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go_test</title>
+      <link>https://hzw9527.github.io/posts/go/go_test/</link>
+      <pubDate>Mon, 13 Jun 2022 23:02:46 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_test/</guid>
+      <description>&lt;p&gt;如何编写单元测试和性能测试用例&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Yaml基本语法</title>
+      <link>https://hzw9527.github.io/posts/yaml/yaml/</link>
+      <pubDate>Mon, 13 Jun 2022 21:05:43 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/yaml/yaml/</guid>
+      <description>&lt;p&gt;主要讲解 yaml 的基本语法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Abstract_factory</title>
+      <link>https://hzw9527.github.io/posts/pattern/abstract_factory/</link>
+      <pubDate>Mon, 06 Jun 2022 21:39:27 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/pattern/abstract_factory/</guid>
+      <description>&lt;p&gt;学习创建型模式-抽象工厂&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Factory_function</title>
+      <link>https://hzw9527.github.io/posts/pattern/factory_function/</link>
+      <pubDate>Mon, 06 Jun 2022 21:37:57 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/pattern/factory_function/</guid>
+      <description>&lt;p&gt;学习创建型模式-工厂函数&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Single_factory</title>
+      <link>https://hzw9527.github.io/posts/pattern/single_factory/</link>
+      <pubDate>Mon, 06 Jun 2022 21:36:34 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/pattern/single_factory/</guid>
+      <description>&lt;p&gt;学习创建型模式-简单工厂模式&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Single</title>
+      <link>https://hzw9527.github.io/posts/pattern/single/</link>
+      <pubDate>Mon, 06 Jun 2022 21:34:07 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/pattern/single/</guid>
+      <description>&lt;p&gt;创建型模式-单例模式&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Blog_install</title>
+      <link>https://hzw9527.github.io/posts/blog/blog_install/</link>
+      <pubDate>Thu, 26 May 2022 22:35:30 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/blog/blog_install/</guid>
+      <description>1 安装之前的准备工作  需要安装好 hugo 需要安装好对应的 go 版本，新下载的 hugo 程序可能依赖对应的 go 版本  2 搭建博客 这里以主题 papermod 为例
+2.1 创建你的博客 $ hugo new site blog 2.2 使用 hugo 主题 $ cd blog $ git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1 2.3 修改配置文件 切换到博客根目录， 删除 toml 文件，创建 config.yaml 文件，内容如下
+baseURL: &amp;#34;https://examplesite.com/&amp;#34; title: ExampleSite paginate: 5 theme: PaperMod enableRobotsTXT: true buildDrafts: false buildFuture: false buildExpired: false googleAnalytics: UA-123-45 minify: disableXML: true minifyOutput: true params: env: production # to enable google analytics, opengraph, twitter-cards and schema.</description>
+    </item>
+    
+    <item>
+      <title>Git_merge</title>
+      <link>https://hzw9527.github.io/posts/git/git_merge/</link>
+      <pubDate>Tue, 17 May 2022 21:48:17 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/git/git_merge/</guid>
+      <description>git merge 1 git merge 默认操作 创建 develop 分支 基于 develop 分支创建 feature/print-1 分支
+git checkout -b feature/print-1 develop 完成 feature/print-1 分支开发，有两个提交，当前视图如下
+切换到 develop 分支 merge feature/print-1 分支
+git merge feature/print-1 视图如下
+2 git merge &amp;ndash;no-ff 基于 develop 分支创建了feature-print2 分支，完成两次提交 add3 add4 后切换到
+develop 分支，紧接着合并 feature-print2,
+git merge --no-ff feature/print-2 3 git merge &amp;ndash;squash 基于 develop 分支创建了feature-print3 分支，完成两次提交 print3-1 print3-2 后切换到
+develop 分支，紧接着合并 feature-print3,
+git merge --squash feature/print-2 4 git merge 示意图 git merge 默认操作 git merge &amp;ndash;no-ff git merge &amp;ndash;squash </description>
+    </item>
+    
+    <item>
+      <title>Git_flow</title>
+      <link>https://hzw9527.github.io/posts/git/git_flow/</link>
+      <pubDate>Tue, 17 May 2022 21:36:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/git/git_flow/</guid>
+      <description>&lt;p&gt;git flow工作流&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Markdown Syntax Guide</title>
+      <link>https://hzw9527.github.io/posts/markdown-syntax/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/markdown-syntax/</guid>
+      <description>Sample article showcasing basic Markdown syntax and formatting for HTML elements.</description>
+    </item>
+    
+    <item>
+      <title>Rich Content</title>
+      <link>https://hzw9527.github.io/posts/rich-content/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/rich-content/</guid>
+      <description>A brief description of Hugo Shortcodes</description>
+    </item>
+    
+    <item>
+      <title>Placeholder Text</title>
+      <link>https://hzw9527.github.io/posts/placeholder-text/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/placeholder-text/</guid>
+      <description>Lorem Ipsum Dolor Si Amet</description>
+    </item>
+    
+    <item>
+      <title>Math Typesetting</title>
+      <link>https://hzw9527.github.io/posts/math-typesetting/</link>
+      <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/math-typesetting/</guid>
+      <description>A brief guide to setup KaTeX</description>
+    </item>
+    
+    <item>
+      <title>Emoji Support</title>
+      <link>https://hzw9527.github.io/posts/emoji-support/</link>
+      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/emoji-support/</guid>
+      <description>Guide to emoji usage in Hugo</description>
+    </item>
+    
+  </channel>
+</rss>

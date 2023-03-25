@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Makefile Core Syntax | hzw</title>
+<meta name="keywords" content="makefile">
+<meta name="description" content="熟练掌握 Makefile 语法">
+<meta name="author" content="Theme PaperMod">
+<link rel="canonical" href="https://hzw9527.github.io/posts/makefile/make-core-syntax/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.abbb4007d57c8d9f0a51f45f3d2e079cbeff25fc61fbcfb3135b95a5a6daf57c.css" integrity="sha256-q7tAB9V8jZ8KUfRfPS4HnL7/Jfxh&#43;8&#43;zE1uVpaba9Xw=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://hzw9527.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hzw9527.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hzw9527.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hzw9527.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hzw9527.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hzw9527.github.io/posts/makefile/make-core-syntax/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Makefile Core Syntax" />
+<meta property="og:description" content="熟练掌握 Makefile 语法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hzw9527.github.io/posts/makefile/make-core-syntax/" /><meta property="og:image" content="https://hzw9527.github.io/papermod-cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-20T22:06:05&#43;08:00" />
+<meta property="article:modified_time" content="2022-10-20T22:06:05&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hzw9527.github.io/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Makefile Core Syntax"/>
+<meta name="twitter:description" content="熟练掌握 Makefile 语法"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hzw9527.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Makefile Core Syntax",
+      "item": "https://hzw9527.github.io/posts/makefile/make-core-syntax/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Makefile Core Syntax",
+  "name": "Makefile Core Syntax",
+  "description": "熟练掌握 Makefile 语法\n",
+  "keywords": [
+    "makefile"
+  ],
+  "articleBody": "熟练掌握 Makefile 语法\n1 makefile 简介 Makefile 文件由三个部分组成，分别是 Makefile 规则、Makefile 语法和 Makefile 命令（这些命令可以是 Linux 命令，也可以是可执行的脚本文件）。\n2 makefile 使用方法 实际项目中一般先编写一个 makefile 文件,指定整个项目的编译规则，然后通过 make 命令来解析该 Makefile 文件，实现项目编译、管理的自动化。\nmake 支持 “makefile”和“Makefile”这两种文件名，建议使用 Makefile,大写开头，一目了然。\nmake 也支持 -f / –file 指定其他文件名，e.g. make -f golang.mk 或者 make --file golang.mk。\n3 makefile 规则介绍 makefile规则由 目标、依赖和命令组成，用来指定源文件编译的先后顺序。\nMakefile 规则可以自动判断是否需要重新编译某个目标，从而确保目标仅在需要时编译。\n3.1 规则语法 target ...: prerequisites ... command ... ...  target： 可以时目标文件，执行文件，标签。多个目标使用空格分离。可以使用通配符。 prerequisites： 生成该 target 所需要的依赖。多个依赖使用空格分离。 command：表示该 target 要执行的命令。  执行名列钱前，默认会控制台打印该命令，不打印命令前加@。 command可为多条，也可以分行写，每行 command 前要加 tab 键开始。后一条命令依赖前一条命令必须写在同一行，使用分号隔开。 忽略命令出错 command 前加减号 -。 e.g. -@rm hello.o。    target 不存在，或者 prerequisites 中有一个以上的文件比 targets 文件新时，command 命令会重新执行。\n3.2 伪目标 一般需要显示的指定伪目标，通过 .PHONY 指定。\n.PHONY: clean clean: rm hello.o Makefile 不会为伪目标生成任何文件，无法生产它的依赖的关系。\n伪目标总是会执行，所以其依赖总是被决议，以达到同时执行所有依赖项的目的。\n伪目标也可以有依赖。\n.PHONY: all all: lint test build 3.3 清理编译中间文件 项目编译过程中产生一些中间文件。Makefile 一般会有一个 clean 伪目标，用来清理中间产物。\nclean: rm hello.o Makefile 支持3个通配符 *，? 和~ 。\nobjects = *.o print: *.c rm *.c 3.4 order-only 依赖 targets : normal-prerequisites | order-only-prerequisites command ... ... 在上面的规则中，只有第一次构造 targets 时，才会使用 order-only-prerequisites。后面即使 order-only-prerequisites 发生改变，也不会重新构造 targets\n只有 normal-prerequisites 中的文件发生改变时，才会重新构造 targets。\n4 makefile 语法概览 4.1 linux 命令 makefile 支持 linux 命令，默认情况下会输出执行的命令，禁止 make 输出执行的命令\n.PHONY: test test: @echo \"hello world\" 建议在命令前都加@符号，禁止打印命令本身，保证 Makefile 输出易于阅读的、有用的信息。\n默认情况下，每条命令执行完 make 就会检查其返回码。 如果返回成功（返回码为 0），make 就执行下一条指令；如果返回失败（返回码非 0），make 就会终止当前命令。\n有时候命令出错（比如删除了一个不存在的文件）时，我们并不想终止，这时就可以在命令行前加 - 符号，来让 make 忽略命令的出错，以继续执行下一条命令。\nclean: -rm hello.o 4.2 基本变量 Makefile 支持变量赋值、多行变量和环境变量。Makefile 还内置了一些特殊变量和自动化变量\n声明变量\nGO=go 引用变量\n可以通过$()或者${}方式引用，建议使用 $()\nGO=go build: $(GO) build -v . 变量的四种赋值方式\n = 基本的赋值方法  A = a B = $(A) b A = c B 最后的值为 c b，而不是 a b。也就是说，在用变量给变量赋值时，右边变量的取值，取的是最终的变量值。\n:=直接赋值，赋予当前位置的值  A = a B := $(A) b A = c B 最后的值为 a b。\n?= 表示如果该变量没有被赋值，则赋予等号后的值  PLATFORMS ?= linux_amd64 linux_arm64 +=表示将等号后面的值添加到前面的变量上  MAKEFLAGS += --no-print-directory 多行变量\ndefine 关键字设置多行变量\ndefine 变量名 变量内容 ... endef 变量的内容可以包含函数、命令、文字或是其他变量\ndefine USAGE_OPTIONS Options: DEBUG Whether to generate debug symbols. Default is 0. BINS The binaries to build. Default is all of cmd. ... V Set to 1 enable verbose build. Default is 0. endef 环境变量\n在 Makefile 中，有两种环境变量，Makefile 预定义的环境变量和自定义的环境变量。\n默认情况下，Makefile 中定义的环境变量只在当前 Makefile 有效，如果想向下层传递（Makefile 中调用另一个 Makefile），需要使用 export 关键字来声明。\n自定义的环境变量可以覆盖 Makefile 预定义的环境变量。\n声明了一个环境变量\n... export USAGE_OPTIONS ... Makefile 还支持两种内置的变量：特殊变量和自动化变量。\n特殊变量是 make 提前定义好的。\nMakefile 还支持自动化变量。自动化变量可以提高我们编写 Makefile 的效率和质量。\n自动化变量，会把模式中所定义的一系列的文件自动地挨个取出，一直到所有符合模式的文件都取完为止。\n$是用得最多的。$ 对于构造有关联的文件名是比较有效的。如果目标中没有模式的定义，那么 $* 也就不能被推导出。但是，如果目标文件的后缀是 make 所识别的，那么 $* 就是除了后缀的那一部分。\n例如： 如果目标是 foo.c ，因为.c 是 make 所能识别的后缀名，所以 $* 的值就是 foo。\n4.3 条件语句 判断变量ROOT_PACKAGE是否为空，如果为空，则输出错误信息，不为空则打印变量值\nifeq ($(ROOT_PACKAGE),) $(error the variable ROOT_PACKAGE must be set prior to including golang.mk) else $(info the value of ROOT_PACKAGE is $(ROOT_PACKAGE)) endif 条件语句的语法为：\n# if ...   endif # if ... else ...   else  endif 有 4 个关键字：ifeq、ifneq、ifdef、ifndef。\n判断相等\nifeq (, ) ifeq '' '' ifeq \"\" \"\" ifeq \"\" '' ifeq '' \"\" 判断不等\nifneq (, ) ifneq '' '' ifneq \"\" \"\" ifneq \"\" '' ifneq '' \"\" 判断变量是否已定义，如果值不为空，则表达式为真，否则为假\nifdef  判断变量是否未定义，如果值为空，则表达式为真，否则为假\nifndef  4.4 函数 自定义函数\n可以通过 define 关键字来自定义一个函数\ndefine 函数名 函数体 endef 示例：\ndefine Foo @echo \"my name is $(0)\" @echo \"param is $(1)\" endef define 本质上是定义一个多行变量，可以在 call 的作用下当作函数来使用，在其他位置使用只能作为多行变量来使用，例如：\nvar := $(call Foo) new := $(Foo) 预定义函数\nmake 编译器也定义了很多函数，这些函数叫作预定义函数\n$(function arguments) 或者\n${ } arguments 参数间用逗号分割。函数的参数也可以是变量。\nPLATFORM = linux_amd64 GOOS := $(word 1, $(subst _, ,$(PLATFORM))) 上面的例子用到了两个函数：word 和 subst。word 函数有两个参数，1 和 subst 函数的输出。subst 函数将 PLATFORM 变量值中的 _ 替换成空格（替换后的 PLATFORM 值为 linux amd64）。word 函数取 linux amd64 字符串中的第一个单词。所以最后 GOOS 的值为 linux。\n常用的函数如下：\n5 引入其他 makefile Makefile 要结构化、层次化，这一点可以通过在项目根目录下的 Makefile 中引入其他 Makefile。\n通过关键字 include，把别的 makefile 包含进来。\ninclude scripts/make-rules/common.mk include scripts/make-rules/golang.mk include 也可以包含通配符include scripts/make-rules/*。make 命令会按下面的顺序查找 makefile 文件\n 如果是绝对或相对路径，就直接根据路径 include 进来。 如果 make 执行时，有-I或–include-dir参数，那么 make 就会在这个参数所指定的目录下去找。 如果目录/include（一般是/usr/local/bin或/usr/include）存在的话，make 也会去找。  如果有文件没有找到，make 会生成一条警告信息，但不会马上出现致命错误，而是继续载入其他的文件。一旦完成 makefile 的读取，make 会再重试这些没有找到或是不能读取的文件。如果还是不行，make 才会出现一条致命错误信息。如果你想让 make 忽略那些无法读取的文件继续执行，可以在 include 前加一个减号-，如-include 。\n",
+  "wordCount" : "543",
+  "inLanguage": "en",
+  "datePublished": "2022-10-20T22:06:05+08:00",
+  "dateModified": "2022-10-20T22:06:05+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Theme PaperMod"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hzw9527.github.io/posts/makefile/make-core-syntax/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hzw",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hzw9527.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hzw9527.github.io/" accesskey="h" title="hzw (Alt + H)">hzw</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fr/" title="French"
+                            aria-label=":fr:">🇫🇷</a>
+                    </li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fa/" title="Fa"
+                            aria-label="Fa">Fa</a>
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hzw9527.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://hzw9527.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://hzw9527.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Makefile Core Syntax
+    </h1>
+    <div class="post-meta"><span title='2022-10-20 22:06:05 +0800 CST'>October 20, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href="https://github.com/hzw9527.github.io/tree/exampleSite/content/posts/makefile/make-core-syntax.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-makefile-%e7%ae%80%e4%bb%8b" aria-label="1 makefile 简介">1 makefile 简介</a></li>
+                <li>
+                    <a href="#2-makefile-%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95" aria-label="2 makefile 使用方法">2 makefile 使用方法</a></li>
+                <li>
+                    <a href="#3-makefile-%e8%a7%84%e5%88%99%e4%bb%8b%e7%bb%8d" aria-label="3 makefile 规则介绍">3 makefile 规则介绍</a><ul>
+                        
+                <li>
+                    <a href="#31-%e8%a7%84%e5%88%99%e8%af%ad%e6%b3%95" aria-label="3.1 规则语法">3.1 规则语法</a></li>
+                <li>
+                    <a href="#32-%e4%bc%aa%e7%9b%ae%e6%a0%87" aria-label="3.2 伪目标">3.2 伪目标</a></li>
+                <li>
+                    <a href="#33-%e6%b8%85%e7%90%86%e7%bc%96%e8%af%91%e4%b8%ad%e9%97%b4%e6%96%87%e4%bb%b6" aria-label="3.3 清理编译中间文件">3.3 清理编译中间文件</a></li>
+                <li>
+                    <a href="#34-order-only-%e4%be%9d%e8%b5%96" aria-label="3.4 order-only 依赖">3.4 order-only 依赖</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-makefile-%e8%af%ad%e6%b3%95%e6%a6%82%e8%a7%88" aria-label="4 makefile 语法概览">4 makefile 语法概览</a><ul>
+                        
+                <li>
+                    <a href="#41-linux-%e5%91%bd%e4%bb%a4" aria-label="4.1 linux 命令">4.1 linux 命令</a></li>
+                <li>
+                    <a href="#42-%e5%9f%ba%e6%9c%ac%e5%8f%98%e9%87%8f" aria-label="4.2 基本变量">4.2 基本变量</a></li>
+                <li>
+                    <a href="#43-%e6%9d%a1%e4%bb%b6%e8%af%ad%e5%8f%a5" aria-label="4.3 条件语句">4.3 条件语句</a></li>
+                <li>
+                    <a href="#44-%e5%87%bd%e6%95%b0" aria-label="4.4 函数">4.4 函数</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-%e5%bc%95%e5%85%a5%e5%85%b6%e4%bb%96-makefile" aria-label="5 引入其他 makefile">5 引入其他 makefile</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>熟练掌握 Makefile 语法</p>
+<h2 id="1-makefile-简介">1 makefile 简介<a hidden class="anchor" aria-hidden="true" href="#1-makefile-简介">#</a></h2>
+<p>Makefile 文件由三个部分组成，分别是 Makefile 规则、Makefile 语法和 Makefile 命令（这些命令可以是 Linux 命令，也可以是可执行的脚本文件）。</p>
+<h2 id="2-makefile-使用方法">2 makefile 使用方法<a hidden class="anchor" aria-hidden="true" href="#2-makefile-使用方法">#</a></h2>
+<p>实际项目中一般先编写一个 makefile 文件,指定整个项目的编译规则，然后通过 make 命令来解析该 Makefile 文件，实现项目编译、管理的自动化。</p>
+<p>make 支持 “makefile”和“Makefile”这两种文件名，建议使用 <code>Makefile</code>,大写开头，一目了然。</p>
+<p>make 也支持 -f / &ndash;file 指定其他文件名，e.g. <code>make -f golang.mk</code> 或者 <code>make --file golang.mk</code>。</p>
+<h2 id="3-makefile-规则介绍">3 makefile 规则介绍<a hidden class="anchor" aria-hidden="true" href="#3-makefile-规则介绍">#</a></h2>
+<p>makefile规则由 目标、依赖和命令组成，用来指定源文件编译的先后顺序。</p>
+<p>Makefile 规则可以自动判断是否需要重新编译某个目标，从而确保目标仅在需要时编译。</p>
+<h3 id="31-规则语法">3.1 规则语法<a hidden class="anchor" aria-hidden="true" href="#31-规则语法">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">target ...</span><span class="o">:</span> <span class="n">prerequisites</span> ...
+</span></span><span class="line"><span class="cl">    <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    ...
+</span></span></code></pre></div><ul>
+<li>target： 可以时目标文件，执行文件，标签。多个目标使用空格分离。可以使用通配符。</li>
+<li>prerequisites： 生成该 target 所需要的依赖。多个依赖使用空格分离。</li>
+<li>command：表示该 target 要执行的命令。
+<ul>
+<li>执行名列钱前，默认会控制台打印该命令，不打印命令前加@。</li>
+<li>command可为多条，也可以分行写，每行 command 前要加 tab 键开始。后一条命令依赖前一条命令必须写在同一行，使用分号隔开。</li>
+<li>忽略命令出错 command 前加减号 -。 e.g. <code>-@rm hello.o</code>。</li>
+</ul>
+</li>
+</ul>
+<p>target 不存在，或者 prerequisites 中有一个以上的文件比 targets 文件新时，command 命令会重新执行。</p>
+<h3 id="32-伪目标">3.2 伪目标<a hidden class="anchor" aria-hidden="true" href="#32-伪目标">#</a></h3>
+<p>一般需要显示的指定伪目标，通过  <code>.PHONY</code> 指定。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span>
+</span></span><span class="line"><span class="cl"><span class="nf">clean</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    rm hello.o
+</span></span></code></pre></div><p>Makefile 不会为伪目标生成任何文件，无法生产它的依赖的关系。</p>
+<p>伪目标总是会执行，所以其依赖总是被决议，以达到同时执行所有依赖项的目的。</p>
+<p>伪目标也可以有依赖。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">all</span>
+</span></span><span class="line"><span class="cl"><span class="nf">all</span><span class="o">:</span> <span class="n">lint</span> <span class="n">test</span> <span class="n">build</span>
+</span></span></code></pre></div><h3 id="33-清理编译中间文件">3.3 清理编译中间文件<a hidden class="anchor" aria-hidden="true" href="#33-清理编译中间文件">#</a></h3>
+<p>项目编译过程中产生一些中间文件。Makefile 一般会有一个 clean 伪目标，用来清理中间产物。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">clean</span><span class="o">:</span>  
+</span></span><span class="line"><span class="cl">    rm hello.o
+</span></span></code></pre></div><p>Makefile 支持3个通配符 *，? 和~ 。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">objects</span> <span class="o">=</span> *.o
+</span></span><span class="line"><span class="cl"><span class="nf">print</span><span class="o">:</span> *.<span class="n">c</span>
+</span></span><span class="line"><span class="cl">    rm *.c
+</span></span></code></pre></div><h3 id="34-order-only-依赖">3.4 order-only 依赖<a hidden class="anchor" aria-hidden="true" href="#34-order-only-依赖">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">targets </span><span class="o">:</span> <span class="n">normal</span>-<span class="n">prerequisites</span> <span class="p">|</span> <span class="n">order</span>-<span class="n">only</span>-<span class="n">prerequisites</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    ...
+</span></span></code></pre></div><p>在上面的规则中，只有第一次构造 targets 时，才会使用 order-only-prerequisites。后面即使 order-only-prerequisites 发生改变，也不会重新构造 targets</p>
+<p>只有 normal-prerequisites 中的文件发生改变时，才会重新构造 targets。</p>
+<h2 id="4-makefile-语法概览">4 makefile 语法概览<a hidden class="anchor" aria-hidden="true" href="#4-makefile-语法概览">#</a></h2>
+<h3 id="41-linux-命令">4.1 linux 命令<a hidden class="anchor" aria-hidden="true" href="#41-linux-命令">#</a></h3>
+<p>makefile 支持 linux 命令，默认情况下会输出执行的命令，禁止 make 输出执行的命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">test</span>
+</span></span><span class="line"><span class="cl"><span class="nf">test</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    @echo <span class="s2">&#34;hello world&#34;</span>
+</span></span></code></pre></div><p>建议在命令前都加@符号，禁止打印命令本身，保证 Makefile 输出易于阅读的、有用的信息。</p>
+<p>默认情况下，每条命令执行完 make 就会检查其返回码。 如果返回成功（返回码为 0），make 就执行下一条指令；如果返回失败（返回码非 0），make 就会终止当前命令。</p>
+<p>有时候命令出错（比如删除了一个不存在的文件）时，我们并不想终止，这时就可以在命令行前加 - 符号，来让 make 忽略命令的出错，以继续执行下一条命令。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">clean</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    -rm hello.o
+</span></span></code></pre></div><h3 id="42-基本变量">4.2 基本变量<a hidden class="anchor" aria-hidden="true" href="#42-基本变量">#</a></h3>
+<p>Makefile 支持变量赋值、多行变量和环境变量。Makefile 还内置了一些特殊变量和自动化变量</p>
+<p>声明变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">GO</span><span class="o">=</span>go
+</span></span></code></pre></div><p>引用变量</p>
+<p>可以通过$()或者${}方式引用，建议使用  $()</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">GO</span><span class="o">=</span>go
+</span></span><span class="line"><span class="cl"><span class="nf">build</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">$(</span>GO<span class="k">)</span> build -v .
+</span></span></code></pre></div><p><strong>变量的四种赋值方式</strong></p>
+<ol>
+<li>= 基本的赋值方法</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">A</span> <span class="o">=</span> a
+</span></span><span class="line"><span class="cl"><span class="nv">B</span> <span class="o">=</span> <span class="k">$(</span>A<span class="k">)</span> b
+</span></span><span class="line"><span class="cl"><span class="nv">A</span> <span class="o">=</span> c
+</span></span></code></pre></div><p>B 最后的值为 <code>c b</code>，而不是 <code>a b</code>。也就是说，在用变量给变量赋值时，右边变量的取值，取的是最终的变量值。</p>
+<ol start="2">
+<li>:=直接赋值，赋予当前位置的值</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">A</span> <span class="o">=</span> a
+</span></span><span class="line"><span class="cl"><span class="nv">B</span> <span class="o">:=</span> <span class="k">$(</span>A<span class="k">)</span> b
+</span></span><span class="line"><span class="cl"><span class="nv">A</span> <span class="o">=</span> c
+</span></span></code></pre></div><p>B 最后的值为 <code>a b</code>。</p>
+<ol start="3">
+<li>?= 表示如果该变量没有被赋值，则赋予等号后的值</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">PLATFORMS</span> <span class="o">?=</span> linux_amd64 linux_arm64
+</span></span></code></pre></div><ol start="4">
+<li>+=表示将等号后面的值添加到前面的变量上</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">MAKEFLAGS</span> <span class="o">+=</span> --no-print-directory
+</span></span></code></pre></div><p><strong>多行变量</strong></p>
+<p>define 关键字设置多行变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">define</span> <span class="err">变量名</span>
+</span></span><span class="line"><span class="cl"><span class="err">变量内容</span>
+</span></span><span class="line"><span class="cl"><span class="err">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">endef</span>
+</span></span></code></pre></div><p>变量的内容可以包含函数、命令、文字或是其他变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">define</span> <span class="err">USAGE_OPTIONS</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">Options</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  DEBUG        Whether to generate debug symbols. Default is 0.
+</span></span><span class="line"><span class="cl">  BINS         The binaries to build. Default is all of cmd.
+</span></span><span class="line"><span class="cl">  ...
+</span></span><span class="line"><span class="cl">  V            Set to <span class="m">1</span> <span class="nb">enable</span> verbose build. Default is 0.
+</span></span><span class="line"><span class="cl"><span class="err">endef</span>
+</span></span></code></pre></div><p><strong>环境变量</strong></p>
+<p>在 Makefile 中，有两种环境变量，Makefile 预定义的环境变量和自定义的环境变量。</p>
+<p>默认情况下，Makefile 中定义的环境变量只在当前 Makefile 有效，如果想向下层传递（Makefile 中调用另一个 Makefile），需要使用 export 关键字来声明。</p>
+<p>自定义的环境变量可以覆盖 Makefile 预定义的环境变量。</p>
+<p>声明了一个环境变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">...</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="nv">USAGE_OPTIONS</span>
+</span></span><span class="line"><span class="cl"><span class="err">...</span>
+</span></span></code></pre></div><p>Makefile 还支持两种内置的变量：特殊变量和自动化变量。</p>
+<p>特殊变量是 make 提前定义好的。</p>
+<p><img loading="lazy" src="./make%e9%a2%84%e5%ae%9a%e4%b9%89%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f_2022-10-26_21-45-30.png" alt=""  />
+</p>
+<p>Makefile 还支持自动化变量。自动化变量可以提高我们编写 Makefile 的效率和质量。</p>
+<p>自动化变量，会把模式中所定义的一系列的文件自动地挨个取出，一直到所有符合模式的文件都取完为止。</p>
+<p><img loading="lazy" src="./%e8%87%aa%e5%8a%a8%e5%8c%96%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f_2022-10-26_21-46-03.png" alt=""  />
+</p>
+<p>$<em>是用得最多的。$</em> 对于构造有关联的文件名是比较有效的。如果目标中没有模式的定义，那么 $* 也就不能被推导出。但是，如果目标文件的后缀是 make 所识别的，那么 $* 就是除了后缀的那一部分。</p>
+<p>例如： 如果目标是 foo.c ，因为.c 是 make 所能识别的后缀名，所以 $* 的值就是 foo。</p>
+<h3 id="43-条件语句">4.3 条件语句<a hidden class="anchor" aria-hidden="true" href="#43-条件语句">#</a></h3>
+<p>判断变量ROOT_PACKAGE是否为空，如果为空，则输出错误信息，不为空则打印变量值</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">ROOT_PACKAGE</span><span class="k">)</span><span class="err">,)</span>
+</span></span><span class="line"><span class="cl"><span class="k">$(</span><span class="nv">error</span> <span class="nv">the</span> <span class="nv">variable</span> <span class="nv">ROOT_PACKAGE</span> <span class="nv">must</span> <span class="nv">be</span> <span class="nv">set</span> <span class="nv">prior</span> <span class="nv">to</span> <span class="nv">including</span> <span class="nv">golang</span>.<span class="nv">mk</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">else</span>
+</span></span><span class="line"><span class="cl"><span class="k">$(</span><span class="nv">info</span> <span class="nv">the</span> <span class="nv">value</span> <span class="nv">of</span> <span class="nv">ROOT_PACKAGE</span> <span class="nv">is</span> <span class="k">$(</span><span class="nv">ROOT_PACKAGE</span><span class="k">))</span>
+</span></span><span class="line"><span class="cl"><span class="err">endif</span>
+</span></span></code></pre></div><p>条件语句的语法为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="c"># if ...
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="err">&lt;conditional-directive&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">&lt;text-if-true&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">endif</span>
+</span></span><span class="line"><span class="cl"><span class="c"># if ... else ...
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="err">&lt;conditional-directive&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">&lt;text-if-true&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">else</span>
+</span></span><span class="line"><span class="cl"><span class="err">&lt;text-if-false&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">endif</span>
+</span></span></code></pre></div><p>有 4 个关键字：ifeq、ifneq、ifdef、ifndef。</p>
+<p>判断相等</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="err">(&lt;arg1&gt;,</span> <span class="err">&lt;arg2&gt;)</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="s1">&#39;&lt;arg1&gt;&#39;</span> <span class="s1">&#39;&lt;arg2&gt;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="s2">&#34;&lt;arg1&gt;&#34;</span> <span class="s2">&#34;&lt;arg2&gt;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="s2">&#34;&lt;arg1&gt;&#34;</span> <span class="s1">&#39;&lt;arg2&gt;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifeq</span> <span class="s1">&#39;&lt;arg1&gt;&#39;</span> <span class="s2">&#34;&lt;arg2&gt;&#34;</span>
+</span></span></code></pre></div><p>判断不等</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">ifneq</span> <span class="err">(&lt;arg1&gt;,</span> <span class="err">&lt;arg2&gt;)</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifneq</span> <span class="s1">&#39;&lt;arg1&gt;&#39;</span> <span class="s1">&#39;&lt;arg2&gt;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifneq</span> <span class="s2">&#34;&lt;arg1&gt;&#34;</span> <span class="s2">&#34;&lt;arg2&gt;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifneq</span> <span class="s2">&#34;&lt;arg1&gt;&#34;</span> <span class="s1">&#39;&lt;arg2&gt;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="err">ifneq</span> <span class="s1">&#39;&lt;arg1&gt;&#39;</span> <span class="s2">&#34;&lt;arg2&gt;&#34;</span>
+</span></span></code></pre></div><p>判断变量是否已定义，如果值不为空，则表达式为真，否则为假</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">ifdef</span> <span class="err">&lt;variable-name&gt;</span>
+</span></span></code></pre></div><p>判断变量是否未定义，如果值为空，则表达式为真，否则为假</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">ifndef</span> <span class="err">&lt;variable-name&gt;</span>
+</span></span></code></pre></div><h3 id="44-函数">4.4 函数<a hidden class="anchor" aria-hidden="true" href="#44-函数">#</a></h3>
+<p><strong>自定义函数</strong></p>
+<p>可以通过 define 关键字来自定义一个函数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">define</span> <span class="err">函数名</span>
+</span></span><span class="line"><span class="cl"><span class="err">函数体</span>
+</span></span><span class="line"><span class="cl"><span class="err">endef</span>
+</span></span></code></pre></div><p>示例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">define</span> <span class="err">Foo</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@echo</span> <span class="s2">&#34;my name is $(0)&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@echo</span> <span class="s2">&#34;param is $(1)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">endef</span>
+</span></span></code></pre></div><p>define 本质上是定义一个多行变量，可以在 call 的作用下当作函数来使用，在其他位置使用只能作为多行变量来使用，例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">var</span> <span class="o">:=</span> <span class="k">$(</span>call Foo<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">new</span> <span class="o">:=</span> <span class="k">$(</span>Foo<span class="k">)</span>
+</span></span></code></pre></div><p><strong>预定义函数</strong></p>
+<p>make 编译器也定义了很多函数，这些函数叫作预定义函数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="k">$(</span>&lt;<span class="nv">function</span>&gt; &lt;<span class="nv">arguments</span>&gt;<span class="k">)</span>
+</span></span></code></pre></div><p>或者</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">${&lt;function&gt;</span> <span class="err">&lt;arguments&gt;}</span>
+</span></span></code></pre></div><p>arguments 参数间用逗号分割。函数的参数也可以是变量。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">PLATFORM</span> <span class="o">=</span> linux_amd64
+</span></span><span class="line"><span class="cl"><span class="nv">GOOS</span> <span class="o">:=</span> <span class="k">$(</span>word 1, <span class="k">$(</span>subst _, ,<span class="k">$(</span>PLATFORM<span class="k">)))</span>
+</span></span></code></pre></div><p>上面的例子用到了两个函数：word 和 subst。word 函数有两个参数，1 和 subst 函数的输出。subst 函数将 PLATFORM 变量值中的 _ 替换成空格（替换后的 PLATFORM 值为 linux amd64）。word 函数取 linux amd64 字符串中的第一个单词。所以最后 GOOS 的值为 linux。</p>
+<p>常用的函数如下：</p>
+<p><img loading="lazy" src="./make%e9%a2%84%e5%ae%9a%e4%b9%89%e5%87%bd%e6%95%b0_2022-10-26_22-36-32.png" alt=""  />
+</p>
+<h2 id="5-引入其他-makefile">5 引入其他 makefile<a hidden class="anchor" aria-hidden="true" href="#5-引入其他-makefile">#</a></h2>
+<p>Makefile 要结构化、层次化，这一点可以通过在项目根目录下的 Makefile 中引入其他 Makefile。</p>
+<p>通过关键字 include，把别的 makefile 包含进来。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="err">include</span> <span class="err">scripts/make-rules/common.mk</span>
+</span></span><span class="line"><span class="cl"><span class="err">include</span> <span class="err">scripts/make-rules/golang.mk</span>
+</span></span></code></pre></div><p>include 也可以包含通配符include scripts/make-rules/*。make 命令会按下面的顺序查找 makefile 文件</p>
+<ul>
+<li>如果是绝对或相对路径，就直接根据路径 include 进来。</li>
+<li>如果 make 执行时，有-I或&ndash;include-dir参数，那么 make 就会在这个参数所指定的目录下去找。</li>
+<li>如果目录<prefix>/include（一般是/usr/local/bin或/usr/include）存在的话，make 也会去找。</li>
+</ul>
+<p>如果有文件没有找到，make 会生成一条警告信息，但不会马上出现致命错误，而是继续载入其他的文件。一旦完成 makefile 的读取，make 会再重试这些没有找到或是不能读取的文件。如果还是不行，make 才会出现一条致命错误信息。如果你想让 make 忽略那些无法读取的文件继续执行，可以在 include 前加一个减号-，如-include <filename>。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hzw9527.github.io/tags/makefile/">makefile</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://hzw9527.github.io/posts/linux/ps/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>linux 进程</span>
+  </a>
+  <a class="next" href="https://hzw9527.github.io/posts/go/go_modules/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Go_modules</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Makefile Core Syntax on twitter"
+        href="https://twitter.com/intent/tweet/?text=Makefile%20Core%20Syntax&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fmakefile%2fmake-core-syntax%2f&amp;hashtags=makefile">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Makefile Core Syntax on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fmakefile%2fmake-core-syntax%2f&amp;title=Makefile%20Core%20Syntax&amp;summary=Makefile%20Core%20Syntax&amp;source=https%3a%2f%2fhzw9527.github.io%2fposts%2fmakefile%2fmake-core-syntax%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Makefile Core Syntax on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fhzw9527.github.io%2fposts%2fmakefile%2fmake-core-syntax%2f&title=Makefile%20Core%20Syntax">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Makefile Core Syntax on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fhzw9527.github.io%2fposts%2fmakefile%2fmake-core-syntax%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Makefile Core Syntax on whatsapp"
+        href="https://api.whatsapp.com/send?text=Makefile%20Core%20Syntax%20-%20https%3a%2f%2fhzw9527.github.io%2fposts%2fmakefile%2fmake-core-syntax%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Makefile Core Syntax on telegram"
+        href="https://telegram.me/share/url?text=Makefile%20Core%20Syntax&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fmakefile%2fmake-core-syntax%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://hzw9527.github.io/">hzw</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

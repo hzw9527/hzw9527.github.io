@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>linux 权限 | hzw</title>
+<meta name="keywords" content="permission">
+<meta name="description" content="linux 权限">
+<meta name="author" content="Theme PaperMod">
+<link rel="canonical" href="https://hzw9527.github.io/posts/linux/permission/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.abbb4007d57c8d9f0a51f45f3d2e079cbeff25fc61fbcfb3135b95a5a6daf57c.css" integrity="sha256-q7tAB9V8jZ8KUfRfPS4HnL7/Jfxh&#43;8&#43;zE1uVpaba9Xw=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://hzw9527.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hzw9527.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hzw9527.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hzw9527.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hzw9527.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hzw9527.github.io/posts/linux/permission/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="linux 权限" />
+<meta property="og:description" content="linux 权限" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hzw9527.github.io/posts/linux/permission/" /><meta property="og:image" content="https://hzw9527.github.io/papermod-cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-09-07T22:50:13&#43;08:00" />
+<meta property="article:modified_time" content="2022-09-07T22:50:13&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hzw9527.github.io/papermod-cover.png"/>
+
+<meta name="twitter:title" content="linux 权限"/>
+<meta name="twitter:description" content="linux 权限"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hzw9527.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "linux 权限",
+      "item": "https://hzw9527.github.io/posts/linux/permission/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "linux 权限",
+  "name": "linux 权限",
+  "description": "linux 权限\n",
+  "keywords": [
+    "permission"
+  ],
+  "articleBody": "linux 权限\n1 简介 linux 系统中多个用户可以同时操作一台计算机。早些时候计算机比较庞大珍贵，必然要支持多用户操作。\n必须避免用户之间相关干扰，不能因为一个用户的操作让整个系统崩溃，用户也不能干涉属于其他用户的文件。\n2 属主、属组以及其他用户 在 unix 安全模型中，用户可以拥有文件和目录。 文件或者目录属于某个用户，该用户(属主)拥有访问权。\n用户反过来可以属于一个或者多个用户组成的组(用户属组)，属组用户可以被文件和目录的属主授予访问权。\n除了为属组授权，属主还可以为所有用户(UNIX 术语叫做世界 world)授权。\n查看用户信息\n[root@VM-16-4-centos ~]# id uid=0(root) gid=0(root) groups=0(root) [going@dev workspace]$ id uid=1001(going) gid=1001(going) groups=1001(going),981(docker)  uid： 创建用户分配的用户 ID gid： 创建用户分配的属组 ID groups: 用户所在的所有属组 ID  属主信息定义在 /etc/password ,属组信息定义在 /etc/group。在创建用户的属主和属组时，这些文件随 /etc/shadow 文件一并改动。后者保存了用户的密码信息。\n尽管很多类 unix 系统将普通用户分配到一个共同属组(同属 users组)，现代 linux 系统中的做法是为每个用户创建一个与用户同名的单成员属组，使得某些类型授权更容易。\n3 读取、写入、执行 文件和目录的访问权限是按照读取、写入、执行来定义的。\n$ ls -l ls.txt -rw-rw-r-- 1 going going 11123 Aug 17 22:10 ls.txt -rw-rw-r-- 这10个字符是文件属性，第一个是文件类型,常见的文件类型如下\nd | 目录 l | 符号链接，对于符号链接，剩下的文件属性始终都是 rwxrwxrwx。符号链接所指向文件的属性才是真正的文件属性 c | 字符设备文件。指的是按字节流处理数据的设备，例如终端或者 /dev/null b | 块设备文件。指的是按块处理数据的设备，例如硬盘或者 DVD 设备 后面剩下的9个字符是文件模式，分别代表文件属主、文件属组、其他用户的读取、写入、执行权限。\n下面的列表表示你给了对应的文件或者目录什么权限，你才能做什么操作，比如目录的 x 权限属性，用户只有对该目录有 x 执行权限，才能进入该目录。\n   权限属性 文件 目录     r 允许打开并读取文件 允许列出目录内容（如果也设置了执行属性）   w 允许写入或者截断文件，但是不允许重命名或者删除文件。文件的删除或者重命名由目录属性决定 允许在目录内创建、删除、重命名文件(如果也设置了执行属性)   x 允许改文件作为程序执行。以脚本语言编写的程序文件必须设置为可读才能被执行 允许进入该目录，例如 cd directory    下面看几个例子：\n -rw-rw----： 可由文件属主和属组读取、写入普通的文件。 drwxrwx---： 目录。属主和属组可以进入该目录并在其中创建、重命名、删除文件。 lrwxrwxrwx: 符号链接。所有符号链接的权限都是 “虚设”(dummy) 的。真正的权限是由符号链接指向的文件决定的。  4 chmod 改变文件模式 chmod 命令可以修改文件或者目录的模式。只有文件属主或者超级用户才可以修改。\nchmod 命令支持两种不同的模式表示方式。\n 八进制表示法 符号表示法  4.1 八进制表示法 以属主权限为例,总共有三个字符 rwx，每个字符有两种可能，第一个字符可能为 r 或者 -,第二个字符可能为 w 或者 - 第三个字符为 x 或者 - 排列组合 2 = 8 总共有 8 中组合 8进制也就是 0-7\n以二进制形式和八进制形式表示的文件模式\n   八进制模式 二进制模式 文件模式     0 000 ---   1 001 --x   2 010 -w-   3 011 -wx   4 100 r--   5 101 r-x   6 110 rw-   7 111 rwx    如何判断 3 是什么权限 ?\n3 的二进制是 011 也就是 第二位是 1 （也就是 w） 和第三位 是 1(x) ，1 表示当前位置对应的权限，0 就是 -。\n修改权限可以这么操作\n[going@dev vim-study2]$ ls -l ls.txt -rw-rw-r-- 1 going going 11123 Aug 17 22:10 ls.txt [going@dev vim-study2]$ chmod 776 ls.txt [going@dev vim-study2]$ ls -l ls.txt -rwxrwxrw- 1 going going 11123 Aug 17 22:10 ls.txt 776 中 7 表示 111， 也就是 rwx; 6 表示 110 也就是 rw-\n4.2 设置默认权限 umask 可以设置文件创建时的默认权限。该命令使用八进制描述了从文件模式属性中去除权限的位掩码。\n这句话是什么意思呢？ 默认情况下，对于目录，用户所能拥有的最大权限是777；对于文件，用户所能拥有的最大权限是目录的最大权限去掉执行权限，即 666 。因为x执行权限对于目录是必须的，没有执行权限就无法进入目录，而对于文件则不必默认赋予x执行权限。\n对于文件 对于 root 用户，系统默认的 umask 值是 0022；对于普通用户，系统默认的 umask 值是 0002。 umask值一共有4组数字，其中第1组数字用于定义特殊权限，我们一般不予考虑，与一般权限有关的是后3组数字。\n上面的意思就是说 对于 root 用户默认的 umask 值是 0022 ，那么使用 root 用户下创建目录时赋予的权限就是 777 - 022 = 755,也就是 rwxr-xr-x。 创建文件时的权限是 666 - 022 = 644， 也就是 rw-r--r--。\n对于普通用户默认的 umask 值是 0002 ，那么使用普通用户创建目录时赋予权限的就是 777- 002 = 775,也就是 rwrwxr-x。 创建文件时权限是 666- 002 = 775，也就是 rwxrwxr-x\n如果 umask 是 0003 文件权限是 777-003 = 774 ,因为文件默认是没有执行权限的，umask 的值是需要删除的权限，对于三位的二进制数字来说，只可能是 2或者4，也就是对于文件来说，0000 后面的三位数字只可能为偶数，这里设置为奇数可以认为是加上了已经去掉了执行权限，\n所以对于文件来说，0003 和 0002 是一样的。\n普通用户创建目录和文件\n[going@dev vim-study2]$ umask 0002 [going@dev vim-study2]$  a.txt [going@dev vim-study2]$ ls -l a.txt -rw-rw-r-- 1 going going 0 Sep 8 23:23 a.txt [going@dev vim-study2]$ mkdir abc [going@dev vim-study2]$ ls -dl abc drwxrwxr-x 2 going going 4096 Sep 8 23:21 abc 在这里默认的 umask 值是 0002，创建文件 a.txt 权限 就是 664. 文件属性也就是 -rwxrwxr-x。\n目录的权限就是 777 - 002 = 775 文件属性就是也就是 drwxrwxr-x。\n目录权限和文件权限示例\n下面的例子验证了对于文件来说 0002 和 0003 是一样的设置，都是去掉了写权限，执行权限都是默认删除的。\n0003 可以认为对于其他用户需要删除执行权限和写权限，他们加起来才等于 3，但是执行权限默认是删除的，所以这里等同于 0002。\n[going@dev vim-study2]$ umask 0002 [going@dev vim-study2]$  a.txt [going@dev vim-study2]$ ls -l a.txt -rw-rw-r-- 1 going going 0 Sep 8 23:27 a.txt [going@dev vim-study2]$ mkdir 0002 [going@dev vim-study2]$ ls -ld 0002 drwxrwxr-x 2 going going 4096 Sep 8 23:30 0002 [going@dev vim-study2]$ umask 0003 [going@dev vim-study2]$  b.txt [going@dev vim-study2]$ ls -l b.txt -rw-rw-r-- 1 going going 0 Sep 8 23:28 b.txt [going@dev vim-study2]$ mkdir 0003 [going@dev vim-study2]$ ls -ld 0003 drwxrwxr-- 2 going going 4096 Sep 8 23:29 0003 5 修改密码 拥有超级用户权限或者是当前需要修改密码的用户\n当前用户修改密码\n$ passwd 如果你拥有 root 权限，可以修改其他用户的密码，下面是修改 going 用户的密码\n$ passwd going passwd 会强制使用强密码。太短的密码、与旧密码过于相似的密码，字典中的单词，以及太容易被猜到的密码都会被拒绝使用。\n",
+  "wordCount" : "479",
+  "inLanguage": "en",
+  "datePublished": "2022-09-07T22:50:13+08:00",
+  "dateModified": "2022-09-07T22:50:13+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Theme PaperMod"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hzw9527.github.io/posts/linux/permission/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hzw",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hzw9527.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hzw9527.github.io/" accesskey="h" title="hzw (Alt + H)">hzw</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fr/" title="French"
+                            aria-label=":fr:">🇫🇷</a>
+                    </li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fa/" title="Fa"
+                            aria-label="Fa">Fa</a>
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hzw9527.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://hzw9527.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://hzw9527.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      linux 权限
+    </h1>
+    <div class="post-meta"><span title='2022-09-07 22:50:13 +0800 CST'>September 7, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href="https://github.com/hzw9527.github.io/tree/exampleSite/content/posts/linux/permission.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-%e7%ae%80%e4%bb%8b" aria-label="1 简介">1 简介</a></li>
+                <li>
+                    <a href="#2-%e5%b1%9e%e4%b8%bb%e5%b1%9e%e7%bb%84%e4%bb%a5%e5%8f%8a%e5%85%b6%e4%bb%96%e7%94%a8%e6%88%b7" aria-label="2 属主、属组以及其他用户">2 属主、属组以及其他用户</a></li>
+                <li>
+                    <a href="#3-%e8%af%bb%e5%8f%96%e5%86%99%e5%85%a5%e6%89%a7%e8%a1%8c" aria-label="3 读取、写入、执行">3 读取、写入、执行</a></li>
+                <li>
+                    <a href="#4-chmod-%e6%94%b9%e5%8f%98%e6%96%87%e4%bb%b6%e6%a8%a1%e5%bc%8f" aria-label="4 chmod 改变文件模式">4 chmod 改变文件模式</a><ul>
+                        
+                <li>
+                    <a href="#41-%e5%85%ab%e8%bf%9b%e5%88%b6%e8%a1%a8%e7%a4%ba%e6%b3%95" aria-label="4.1 八进制表示法">4.1 八进制表示法</a></li>
+                <li>
+                    <a href="#42-%e8%ae%be%e7%bd%ae%e9%bb%98%e8%ae%a4%e6%9d%83%e9%99%90" aria-label="4.2 设置默认权限">4.2 设置默认权限</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-%e4%bf%ae%e6%94%b9%e5%af%86%e7%a0%81" aria-label="5 修改密码">5 修改密码</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>linux 权限</p>
+<h2 id="1-简介">1 简介<a hidden class="anchor" aria-hidden="true" href="#1-简介">#</a></h2>
+<p>linux 系统中多个用户可以同时操作一台计算机。早些时候计算机比较庞大珍贵，必然要支持多用户操作。</p>
+<p>必须避免用户之间相关干扰，不能因为一个用户的操作让整个系统崩溃，用户也不能干涉属于其他用户的文件。</p>
+<h2 id="2-属主属组以及其他用户">2 属主、属组以及其他用户<a hidden class="anchor" aria-hidden="true" href="#2-属主属组以及其他用户">#</a></h2>
+<p>在 unix 安全模型中，用户可以拥有文件和目录。 文件或者目录属于某个用户，该用户(属主)拥有访问权。</p>
+<p>用户反过来可以属于一个或者多个用户组成的组(用户属组)，属组用户可以被文件和目录的属主授予访问权。</p>
+<p>除了为属组授权，属主还可以为所有用户(UNIX 术语叫做世界 world)授权。</p>
+<p>查看用户信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@VM-16-4-centos ~<span class="o">]</span><span class="c1"># id</span>
+</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev workspace<span class="o">]</span>$ id
+</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1001<span class="o">(</span>going<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1001<span class="o">(</span>going<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1001<span class="o">(</span>going<span class="o">)</span>,981<span class="o">(</span>docker<span class="o">)</span>
+</span></span></code></pre></div><ul>
+<li>uid： 创建用户分配的用户 ID</li>
+<li>gid： 创建用户分配的属组 ID</li>
+<li>groups: 用户所在的所有属组 ID</li>
+</ul>
+<p>属主信息定义在 /etc/password ,属组信息定义在 /etc/group。在创建用户的属主和属组时，这些文件随 /etc/shadow 文件一并改动。后者保存了用户的密码信息。</p>
+<p>尽管很多类 unix 系统将普通用户分配到一个共同属组(同属 users组)，现代 linux 系统中的做法是为每个用户创建一个与用户同名的单成员属组，使得某些类型授权更容易。</p>
+<h2 id="3-读取写入执行">3 读取、写入、执行<a hidden class="anchor" aria-hidden="true" href="#3-读取写入执行">#</a></h2>
+<p>文件和目录的访问权限是按照读取、写入、执行来定义的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -l ls.txt 
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> going going <span class="m">11123</span> Aug <span class="m">17</span> 22:10 ls.txt
+</span></span></code></pre></div><p><code>-rw-rw-r--</code> 这10个字符是文件属性，第一个是文件类型,常见的文件类型如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">d <span class="p">|</span> 目录
+</span></span><span class="line"><span class="cl">l <span class="p">|</span> 符号链接，对于符号链接，剩下的文件属性始终都是 rwxrwxrwx。符号链接所指向文件的属性才是真正的文件属性  
+</span></span><span class="line"><span class="cl">c <span class="p">|</span> 字符设备文件。指的是按字节流处理数据的设备，例如终端或者 /dev/null
+</span></span><span class="line"><span class="cl">b <span class="p">|</span> 块设备文件。指的是按块处理数据的设备，例如硬盘或者 DVD 设备
+</span></span></code></pre></div><p>后面剩下的9个字符是文件模式，分别代表文件属主、文件属组、其他用户的读取、写入、执行权限。</p>
+<p>下面的列表表示你给了对应的文件或者目录什么权限，你才能做什么操作，比如目录的 <code>x</code> 权限属性，用户只有对该目录有 x 执行权限，才能进入该目录。</p>
+<table>
+<thead>
+<tr>
+<th>权限属性</th>
+<th>文件</th>
+<th>目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>允许打开并读取文件</td>
+<td>允许列出目录内容（如果也设置了执行属性）</td>
+</tr>
+<tr>
+<td>w</td>
+<td>允许写入或者截断文件，但是不允许重命名或者删除文件。文件的删除或者重命名由目录属性决定</td>
+<td>允许在目录内创建、删除、重命名文件(如果也设置了执行属性)</td>
+</tr>
+<tr>
+<td>x</td>
+<td>允许改文件作为程序执行。以脚本语言编写的程序文件必须设置为可读才能被执行</td>
+<td>允许进入该目录，例如 cd directory</td>
+</tr>
+</tbody>
+</table>
+<p>下面看几个例子：</p>
+<ul>
+<li><code>-rw-rw----</code>： 可由文件属主和属组读取、写入普通的文件。</li>
+<li><code>drwxrwx---</code>： 目录。属主和属组可以进入该目录并在其中创建、重命名、删除文件。</li>
+<li><code>lrwxrwxrwx</code>: 符号链接。所有符号链接的权限都是 &ldquo;虚设&rdquo;(dummy) 的。真正的权限是由符号链接指向的文件决定的。</li>
+</ul>
+<h2 id="4-chmod-改变文件模式">4 chmod 改变文件模式<a hidden class="anchor" aria-hidden="true" href="#4-chmod-改变文件模式">#</a></h2>
+<p>chmod 命令可以修改文件或者目录的模式。只有文件属主或者超级用户才可以修改。</p>
+<p>chmod 命令支持两种不同的模式表示方式。</p>
+<ul>
+<li>八进制表示法</li>
+<li>符号表示法</li>
+</ul>
+<h3 id="41-八进制表示法">4.1 八进制表示法<a hidden class="anchor" aria-hidden="true" href="#41-八进制表示法">#</a></h3>
+<p>以属主权限为例,总共有三个字符 rwx，每个字符有两种可能，第一个字符可能为 <code>r</code> 或者 <code>-</code>,第二个字符可能为 <code>w</code> 或者 <code>-</code> 第三个字符为 <code>x</code> 或者 <code>-</code>
+排列组合 2 = 8 总共有 8 中组合 8进制也就是 0-7</p>
+<p>以二进制形式和八进制形式表示的文件模式</p>
+<table>
+<thead>
+<tr>
+<th>八进制模式</th>
+<th>二进制模式</th>
+<th>文件模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>000</td>
+<td><code>---</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td>001</td>
+<td><code>--x</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>010</td>
+<td><code>-w-</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>011</td>
+<td><code>-wx</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>100</td>
+<td><code>r--</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>101</td>
+<td><code>r-x</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>110</td>
+<td><code>rw-</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>111</td>
+<td><code>rwx</code></td>
+</tr>
+</tbody>
+</table>
+<p>如何判断 3 是什么权限 ?</p>
+<p>3 的二进制是 011 也就是 第二位是 1 （也就是 <code>w</code>） 和第三位 是 1(<code>x</code>) ，<code>1</code> 表示当前位置对应的权限，<code>0</code>  就是 <code>-</code>。</p>
+<p>修改权限可以这么操作</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ ls -l ls.txt 
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> going going <span class="m">11123</span> Aug <span class="m">17</span> 22:10 ls.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ chmod <span class="m">776</span> ls.txt 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ ls -l ls.txt 
+</span></span><span class="line"><span class="cl">-rwxrwxrw- <span class="m">1</span> going going <span class="m">11123</span> Aug <span class="m">17</span> 22:10 ls.txt
+</span></span></code></pre></div><p>776 中 7 表示 <code>111</code>， 也就是 <code>rwx</code>; 6 表示 <code>110</code> 也就是 <code>rw-</code></p>
+<h3 id="42-设置默认权限">4.2 设置默认权限<a hidden class="anchor" aria-hidden="true" href="#42-设置默认权限">#</a></h3>
+<p>umask 可以设置文件创建时的默认权限。该命令使用八进制描述了从文件模式属性中去除权限的位掩码。</p>
+<p>这句话是什么意思呢？ 默认情况下，对于目录，用户所能拥有的最大权限是777；对于文件，用户所能拥有的最大权限是目录的最大权限去掉执行权限，即 <code>666</code> 。因为x执行权限对于目录是必须的，没有执行权限就无法进入目录，而对于文件则不必默认赋予x执行权限。</p>
+<p>对于文件 对于 <code>root</code> 用户，系统默认的 <code>umask</code> 值是 <code>0022</code>；对于普通用户，系统默认的 <code>umask</code> 值是 <code>0002</code>。 <code>umask</code>值一共有4组数字，其中第1组数字用于定义特殊权限，我们一般不予考虑，与一般权限有关的是后3组数字。</p>
+<p>上面的意思就是说 对于 <code>root</code> 用户默认的 <code>umask</code> 值是 <code>0022</code> ，那么使用 <code>root</code> 用户下创建目录时赋予的权限就是 <code>777 - 022 = 755</code>,也就是 <code>rwxr-xr-x</code>。 创建文件时的权限是 <code>666 - 022 = 644</code>， 也就是 <code>rw-r--r--</code>。</p>
+<p>对于普通用户默认的 <code>umask</code> 值是 <code>0002</code> ，那么使用普通用户创建目录时赋予权限的就是 <code>777- 002 = 775</code>,也就是 rwrwxr-x。 创建文件时权限是 <code>666- 002 = 775</code>，也就是 <code>rwxrwxr-x</code></p>
+<p>如果 <code>umask</code> 是 <code>0003</code> 文件权限是 <code>777-003 = 774</code> ,因为文件默认是没有执行权限的，<code>umask</code> 的值是需要删除的权限，对于三位的二进制数字来说，只可能是 2或者4，也就是对于文件来说，<code>0000</code> 后面的三位数字只可能为偶数，这里设置为奇数可以认为是加上了已经去掉了执行权限，</p>
+<p>所以对于文件来说，<code>0003</code> 和 <code>0002</code> 是一样的。</p>
+<p><strong>普通用户创建目录和文件</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ <span class="nb">umask</span>
+</span></span><span class="line"><span class="cl"><span class="m">0002</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ &gt; a.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ ls -l a.txt 
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> going going <span class="m">0</span> Sep  <span class="m">8</span> 23:23 a.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ mkdir abc
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ ls -dl abc 
+</span></span><span class="line"><span class="cl">drwxrwxr-x <span class="m">2</span> going going <span class="m">4096</span> Sep  <span class="m">8</span> 23:21 abc
+</span></span></code></pre></div><p>在这里默认的 <code>umask</code> 值是 <code>0002</code>，创建文件 <code>a.txt</code> 权限 就是 <code>664</code>. 文件属性也就是 <code>-rwxrwxr-x</code>。</p>
+<p>目录的权限就是 <code>777 - 002 = 775</code> 文件属性就是也就是 <code>drwxrwxr-x</code>。</p>
+<p><strong>目录权限和文件权限示例</strong></p>
+<p>下面的例子验证了对于文件来说 <code>0002</code> 和 <code>0003</code> 是一样的设置，都是去掉了写权限，执行权限都是默认删除的。</p>
+<p><code>0003</code> 可以认为对于其他用户需要删除执行权限和写权限，他们加起来才等于 <code>3</code>，但是执行权限默认是删除的，所以这里等同于 <code>0002</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ <span class="nb">umask</span>
+</span></span><span class="line"><span class="cl"><span class="m">0002</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ &gt; a.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ ls -l a.txt 
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> going going <span class="m">0</span> Sep  <span class="m">8</span> 23:27 a.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ mkdir <span class="m">0002</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ ls -ld <span class="m">0002</span>
+</span></span><span class="line"><span class="cl">drwxrwxr-x <span class="m">2</span> going going <span class="m">4096</span> Sep  <span class="m">8</span> 23:30 <span class="m">0002</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ <span class="nb">umask</span> <span class="m">0003</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ &gt; b.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ ls -l b.txt 
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> going going <span class="m">0</span> Sep  <span class="m">8</span> 23:28 b.txt 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ mkdir <span class="m">0003</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>going@dev vim-study2<span class="o">]</span>$ ls -ld <span class="m">0003</span>
+</span></span><span class="line"><span class="cl">drwxrwxr-- <span class="m">2</span> going going <span class="m">4096</span> Sep  <span class="m">8</span> 23:29 <span class="m">0003</span>
+</span></span></code></pre></div><h2 id="5-修改密码">5 修改密码<a hidden class="anchor" aria-hidden="true" href="#5-修改密码">#</a></h2>
+<p>拥有超级用户权限或者是当前需要修改密码的用户</p>
+<p>当前用户修改密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ passwd 
+</span></span></code></pre></div><p>如果你拥有 root 权限，可以修改其他用户的密码，下面是修改 going 用户的密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ passwd going
+</span></span></code></pre></div><p>passwd 会强制使用<code>强密码</code>。太短的密码、与旧密码过于相似的密码，字典中的单词，以及太容易被猜到的密码都会被拒绝使用。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hzw9527.github.io/tags/permission/">permission</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://hzw9527.github.io/posts/go/go_modules/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Go_modules</span>
+  </a>
+  <a class="next" href="https://hzw9527.github.io/posts/linux/history/">
+    <span class="title">Next »</span>
+    <br>
+    <span>高级键盘技巧</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share linux 权限 on twitter"
+        href="https://twitter.com/intent/tweet/?text=linux%20%e6%9d%83%e9%99%90&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fpermission%2f&amp;hashtags=permission">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share linux 权限 on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fpermission%2f&amp;title=linux%20%e6%9d%83%e9%99%90&amp;summary=linux%20%e6%9d%83%e9%99%90&amp;source=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fpermission%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share linux 权限 on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fpermission%2f&title=linux%20%e6%9d%83%e9%99%90">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share linux 权限 on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fpermission%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share linux 权限 on whatsapp"
+        href="https://api.whatsapp.com/send?text=linux%20%e6%9d%83%e9%99%90%20-%20https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fpermission%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share linux 权限 on telegram"
+        href="https://telegram.me/share/url?text=linux%20%e6%9d%83%e9%99%90&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2flinux%2fpermission%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://hzw9527.github.io/">hzw</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>git_flow on hzw</title>
+    <link>https://hzw9527.github.io/tags/git_flow/</link>
+    <description>Recent content in git_flow on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 17 May 2022 21:36:42 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/git_flow/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git_flow</title>
+      <link>https://hzw9527.github.io/posts/git/git_flow/</link>
+      <pubDate>Tue, 17 May 2022 21:36:42 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/git/git_flow/</guid>
+      <description>&lt;p&gt;git flow工作流&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

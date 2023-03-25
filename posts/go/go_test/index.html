@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Go_test | hzw</title>
+<meta name="keywords" content="测试">
+<meta name="description" content="如何编写单元测试和性能测试用例">
+<meta name="author" content="Theme PaperMod">
+<link rel="canonical" href="https://hzw9527.github.io/posts/go/go_test/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.abbb4007d57c8d9f0a51f45f3d2e079cbeff25fc61fbcfb3135b95a5a6daf57c.css" integrity="sha256-q7tAB9V8jZ8KUfRfPS4HnL7/Jfxh&#43;8&#43;zE1uVpaba9Xw=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://hzw9527.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hzw9527.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hzw9527.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hzw9527.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hzw9527.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hzw9527.github.io/posts/go/go_test/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Go_test" />
+<meta property="og:description" content="如何编写单元测试和性能测试用例" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hzw9527.github.io/posts/go/go_test/" /><meta property="og:image" content="https://hzw9527.github.io/papermod-cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-13T23:02:46&#43;08:00" />
+<meta property="article:modified_time" content="2022-06-13T23:02:46&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hzw9527.github.io/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Go_test"/>
+<meta name="twitter:description" content="如何编写单元测试和性能测试用例"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hzw9527.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Go_test",
+      "item": "https://hzw9527.github.io/posts/go/go_test/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Go_test",
+  "name": "Go_test",
+  "description": "如何编写单元测试和性能测试用例\n",
+  "keywords": [
+    "测试"
+  ],
+  "articleBody": "如何编写单元测试和性能测试用例\n用一些示例来讲解如何编写单元测试和性能测试用例\n1 go 单元测试简介 开发人员确保功能可靠通常要进行单元测试和性能测试。 在 Go 中，我们可以通过testing包对代码进行单元测试和性能测试\n2 如何测试代码 Go 语言有自带的测试框架 testing，可以用来实现单元测试（T 类型）和性能测试（B类型），通过 go test 命令来执行单元测试和性能测试。\ngo test 执行测试用例时，是以 go 包为单位进行测试。 执行时需要指定包名，比如 go test 包名，如果没有指定包名，默认会选择执行命令时所在的包；\rgo test在执行时，会遍历以_test.go结尾的源码文件，执行其中以Test、Benchmark、Example` 开头的测试函数\n3 测试明明规范 3.1 测试文件名规范 Go 的测试文件名必须以 _test.go 结尾。例如，如果我们有一个名为 person.go 的文件，那它的测试文件必须命名为 person_test.go 。这样做是因为，Go 需要区分哪些文件是测试文件。这些测试文件可以被 go test 命令行工具加载，用来测试我们编写的代码，但会被 Go 的构建程序忽略掉，因为 Go 程序的运行不需要这些测试代码。\n3.2 包的命名规范 Go 的测试可以分为白盒测试和黑盒测试。\n 白盒测试：将测试和生产代码放在同一个 Go 包中，这使我们可以同时测试 Go 包中可导出和不可导出的标识符。当我们编写的单元测试需要访问 Go 包中不可导出的变量、函数和方法时，就需要编写白盒测试用例。 将测试和生产代码放在不同的 Go 包中。这时，我们仅可以测试 Go 包的可导出标识符。这意味着我们的测试包将无法访问生产代码中的任何内部函数、变量或常量。  在白盒测试中，Go 的测试包名称需要跟被测试的包名保持一致，例如：person.go 定义了一个 person 包，则 person_test.go 的包名也要为person，这也意味着person.go 和 person_test.go 都要在同一个目录中。\n在黑盒测试中，Go 的测试包名称需要跟被测试的包名不同，但仍然可以存放在同一个目录下。比如，person.go定义了一个 person 包，则 person_test.go 的包名需要跟 person 不同，通常我们命名为 person_test 。\n如果不是需要使用黑盒测试，我们在做单元测试时要尽量使用白盒测试。一方面，这是 go test 工具的默认行为；另一方面，使用白盒测试，我们可以测试和使用不可导出的标识符。\n测试文件和包的命名规范，由 Go 语言及 go test 工具来强制约束\n3.3 函数命名规范 享用多个测试用例测试某个函数，比如 strings.Compare ,可以将测试函数命名为 TestCompareXxx, Xxx 代表 Compare 函数的某个场景描述\nTestCompare、TestCompareIdenticalString、TestCompareStrings`\n3.4 变量命名规范 单元测试用例通常会有一个实际的输出，我们会将预期的输出跟实际的输出进行对比，来判断单元测试是否通过。\n实际输出和预期输出采用如下命令： expected/actual ，或者 got/want\nif c.expected != actual { t.Fatalf(\"Expected User-Agent '%s' does not match '%s'\", c.expected, actual) } 4 单元测试 单元测试用例函数以 Test 开头，TestXxx 或 Test_xxx （ Xxx 部分为任意字母数字组合，首字母大写），函数参数必须是 *testing.T。 testing.T 的 Error 、Errorf 、FailNow 、Fatal 、FatalIf 方法，来说明测试不通过；调用 Log 、Logf方法来记录测试信息\ngo test\ngo test 自动搜集所有格式为*_test.go的测试文件，从中提取全部测试函数并执行.\n -v： 显示测试函数的运行细节 -run：选择要执行的函数。go test -v -run='TestA.*' -count=N: 指定测试函数运行的次数，go test -v -run=‘TestA.*’ -count=2‘  测试单个文件\ngo test helloworld_test.go 4.1 多个输入的测试用例 一个测试用例中，测试不同的输入和输出，也就是不同的测试用例\nfunc TestAbs_2(t *testing.T) { tests := []struct { x float64 want float64 }{ {-0.3, 0.3}, {-2, 2}, {-3.1, 3.1}, {5, 5}, } for _, tt := range tests { if got := Abs(tt.x); got != tt.want { t.Errorf(\"Abs() = %f, want %v\", got, tt.want) } } } assert 也可以使用 assert 判断测试是否通过\nfor _, tt := range tests { got := Abs(tt.x) assert.Equal(t, got, tt.want) } assert 的优势：\n 友好的输出结果，易于阅读，代码更简洁 可以针对每次断言，添加额外的消息说明，例如assert.Equal(t, got, tt.want, “Abs test”)  5 自动生成单元测试用例 安装 gotests 命令\ngo install github.com/cweill/gotests/... gotests 命令执行格式为：gotests [options] [PATH] [FILE],可以为指定 PATH下的所有 Go 源码文件中的函数生成测试代码，也可以只为某个FILE中的函数生成测试代码。\n进入测试代码目录，生成测试用例\n$ gotests -all -w . 生成后的测试用例只需要补齐 TODO 测试变量即可,\ntests := []struct { name string args args want *LimitAndOffset }{ // TODO: Add test cases.  } 比如下\ntype args struct { offset *int64 limit *int64 } tests := []struct { name string args args want *LimitAndOffset }{ { name: \"both offset and limit are not zero\", args: args{ offset: pointer.ToInt64(0), limit: pointer.ToInt64(10), }, want: \u0026LimitAndOffset{ Offset: 0, Limit: 10, }, }, { name: \"both offset and limit are zero\", want: \u0026LimitAndOffset{ Offset: 0, Limit: 1000, }, }, { name: \"offset not zero and limit zero\", args: args{ offset: pointer.ToInt64(2), }, want: \u0026LimitAndOffset{ Offset: 2, Limit: 1000, }, }, { name: \"offset zero and limit not zero\", args: args{ limit: pointer.ToInt64(10), }, want: \u0026LimitAndOffset{ Offset: 0, Limit: 10, }, }, } 6 性能测试  用例函数必须以 Benchmark 开头，例如 BenchmarkXxx 或 Benchmark_Xxx （ Xxx 部分为任意字母数字组合，首字母大写）。 函数参数必须是*testing.B，函数内以b.N作为循环次数，其中N会在运行时动态调整，直到性能测试函数可以持续足够长的时间，以便能够可靠地计时。  示例:\nfunc BenchmarkRandInt(b *testing.B) { for i := 0; i  b.N; i++ { RandInt() } } go test 命令默认不会执行性能测试函数,需要配合 -bench  才会执行，-bench 后可以跟正则表达式\ngo test -bench=\".*\" 表示执行所有的压力测试函数。go test -bench 只会执行压力测试函数，不会执行普通的测试\n$ go test -bench=\".*\" goos: windows goarch: amd64 pkg: go-util/pkg/go-test/test cpu: AMD Ryzen 7 5800X 8-Core Processor BenchmarkRandInt-16 287126193 4.154 ns/op PASS ok go-util/pkg/go-test/test 1.785s  BenchmarkRandInt-4，BenchmarkRandInt表示所测试的测试函数名， 16 表示有 16 个 CPU 线程参与了此次测试，默认是GOMAXPROCS的值。 287126193 ，说明函数中的循环执行了90848414次。 4.154 ns/op，说明每次循环的执行平均耗时是 12.8 纳秒，该值越小，说明代码性能越高  重置测试计数\n性能测试函数在执行循环前，如果要做一些耗时的准备工作，需要重置性能测试时间计数。\nfunc BenchmarkBigLen(b *testing.B) { big := NewBig() b.ResetTimer() for i := 0; i  b.N; i++ { big.Len() } } 也可以先停止再开始\nfunc BenchmarkBigLen(b *testing.B) { b.StopTimer() // 调用该函数停止压力测试的时间计数  big := NewBig() b.StartTimer() // 重新开始时间  for i := 0; i  b.N; i++ { big.Len() } } 6.1 性能测试函数参数支持  benchmem，输出内存分配统计：  $ go test -bench=\".*\" -benchmem goos: windows goarch: amd64 pkg: go-util/pkg/go-test/test cpu: AMD Ryzen 7 5800X 8-Core Processor BenchmarkRandInt-16 286398368 4.193 ns/op 0 B/op 0 allocs/op PASS ok go-util/pkg/go-test/test 1.800s 0 B/op 0 B/op，表示每次执行分配了多少内存（字节），该值越小，说明代码内存占用越小。 0 allocs/op,表示每次执行分配了多少次内存，该值越小，说明分配内存次数越少，意味着代码性能越高。\n benchtime，指定测试时间和循环执行次数（次数格式需要为 Nx，例如 100x,表示100次）  $ go test -bench=\".*\" -benchtime=10s goos: windows goarch: amd64 pkg: go-util/pkg/go-test/test cpu: AMD Ryzen 7 5800X 8-Core Processor BenchmarkRandInt-16 1000000000 4.165 ns/op PASS ok go-util/pkg/go-test/test 4.762s // 测试次数 $ go test -bench=\".*\" -benchtime=100x goos: windows goarch: amd64 pkg: go-util/pkg/go-test/test cpu: AMD Ryzen 7 5800X 8-Core Processor BenchmarkRandInt-16 100 PASS ok go-util/pkg/go-test/test 0.166s  cpu，指定 GOMAXPROCS。 timeout，指定测试函数执行的超时时间  $ go test -bench=\".*\" -timeout=1s -cpu=2 goos: windows goarch: amd64 pkg: go-util/pkg/go-test/test cpu: AMD Ryzen 7 5800X 8-Core Processor BenchmarkRandInt-2 287756878 4.165 ns/op PASS ok go-util/pkg/go-test/test 1.791s ",
+  "wordCount" : "646",
+  "inLanguage": "en",
+  "datePublished": "2022-06-13T23:02:46+08:00",
+  "dateModified": "2022-06-13T23:02:46+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Theme PaperMod"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hzw9527.github.io/posts/go/go_test/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "hzw",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hzw9527.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hzw9527.github.io/" accesskey="h" title="hzw (Alt + H)">hzw</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fr/" title="French"
+                            aria-label=":fr:">🇫🇷</a>
+                    </li>
+                    <li>
+                        <a href="https://hzw9527.github.io/fa/" title="Fa"
+                            aria-label="Fa">Fa</a>
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hzw9527.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hzw9527.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://hzw9527.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://hzw9527.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Go_test
+    </h1>
+    <div class="post-meta"><span title='2022-06-13 23:02:46 +0800 CST'>June 13, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href="https://github.com/hzw9527.github.io/tree/exampleSite/content/posts/go/go_test.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-go-%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95%e7%ae%80%e4%bb%8b" aria-label="1 go 单元测试简介">1 go 单元测试简介</a></li>
+                <li>
+                    <a href="#2-%e5%a6%82%e4%bd%95%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81" aria-label="2 如何测试代码">2 如何测试代码</a></li>
+                <li>
+                    <a href="#3-%e6%b5%8b%e8%af%95%e6%98%8e%e6%98%8e%e8%a7%84%e8%8c%83" aria-label="3 测试明明规范">3 测试明明规范</a><ul>
+                        
+                <li>
+                    <a href="#31-%e6%b5%8b%e8%af%95%e6%96%87%e4%bb%b6%e5%90%8d%e8%a7%84%e8%8c%83" aria-label="3.1 测试文件名规范">3.1 测试文件名规范</a></li>
+                <li>
+                    <a href="#32-%e5%8c%85%e7%9a%84%e5%91%bd%e5%90%8d%e8%a7%84%e8%8c%83" aria-label="3.2 包的命名规范">3.2 包的命名规范</a></li>
+                <li>
+                    <a href="#33-%e5%87%bd%e6%95%b0%e5%91%bd%e5%90%8d%e8%a7%84%e8%8c%83" aria-label="3.3 函数命名规范">3.3 函数命名规范</a></li>
+                <li>
+                    <a href="#34-%e5%8f%98%e9%87%8f%e5%91%bd%e5%90%8d%e8%a7%84%e8%8c%83" aria-label="3.4 变量命名规范">3.4 变量命名规范</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95" aria-label="4 单元测试">4 单元测试</a><ul>
+                        
+                <li>
+                    <a href="#41-%e5%a4%9a%e4%b8%aa%e8%be%93%e5%85%a5%e7%9a%84%e6%b5%8b%e8%af%95%e7%94%a8%e4%be%8b" aria-label="4.1 多个输入的测试用例">4.1 多个输入的测试用例</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-%e8%87%aa%e5%8a%a8%e7%94%9f%e6%88%90%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95%e7%94%a8%e4%be%8b" aria-label="5 自动生成单元测试用例">5 自动生成单元测试用例</a></li>
+                <li>
+                    <a href="#6-%e6%80%a7%e8%83%bd%e6%b5%8b%e8%af%95" aria-label="6 性能测试">6 性能测试</a><ul>
+                        
+                <li>
+                    <a href="#61-%e6%80%a7%e8%83%bd%e6%b5%8b%e8%af%95%e5%87%bd%e6%95%b0%e5%8f%82%e6%95%b0%e6%94%af%e6%8c%81" aria-label="6.1 性能测试函数参数支持">6.1 性能测试函数参数支持</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>如何编写单元测试和性能测试用例</p>
+<p>用一些示例来讲解如何编写单元测试和性能测试用例</p>
+<h2 id="1-go-单元测试简介">1 go 单元测试简介<a hidden class="anchor" aria-hidden="true" href="#1-go-单元测试简介">#</a></h2>
+<p>开发人员确保功能可靠通常要进行单元测试和性能测试。 在 <code>Go</code> 中，我们可以通过testing包对代码进行单元测试和性能测试</p>
+<h2 id="2-如何测试代码">2 如何测试代码<a hidden class="anchor" aria-hidden="true" href="#2-如何测试代码">#</a></h2>
+<p><code>Go</code> 语言有自带的测试框架 <code>testing</code>，可以用来实现单元测试（<code>T</code> 类型）和性能测试（<code>B</code>类型），通过 <code>go test</code> 命令来执行单元测试和性能测试。</p>
+<p><code>go test</code> 执行测试用例时，是以 <code>go</code> 包为单位进行测试。 执行时需要指定包名，比如 <code>go test</code> 包名<code>，如果没有指定包名，默认会选择执行命令时所在的包；</code>go test<code>在执行时，会遍历以</code>_test.go<code>结尾的源码文件，执行其中以</code>Test、Benchmark<code>、</code>Example` 开头的测试函数</p>
+<h2 id="3-测试明明规范">3 测试明明规范<a hidden class="anchor" aria-hidden="true" href="#3-测试明明规范">#</a></h2>
+<h3 id="31-测试文件名规范">3.1 测试文件名规范<a hidden class="anchor" aria-hidden="true" href="#31-测试文件名规范">#</a></h3>
+<p><code>Go</code> 的测试文件名必须以 <code>_test.go</code> 结尾。例如，如果我们有一个名为 <code>person.go</code> 的文件，那它的测试文件必须命名为 <code>person_test.go</code> 。这样做是因为，<code>Go</code>
+需要区分哪些文件是测试文件。这些测试文件可以被 <code>go test</code> 命令行工具加载，用来测试我们编写的代码，但会被 <code>Go</code> 的构建程序忽略掉，因为 <code>Go</code> 程序的运行不需要这些测试代码。</p>
+<h3 id="32-包的命名规范">3.2 包的命名规范<a hidden class="anchor" aria-hidden="true" href="#32-包的命名规范">#</a></h3>
+<p><code>Go</code> 的测试可以分为白盒测试和黑盒测试。</p>
+<ul>
+<li>白盒测试：将测试和生产代码放在同一个 <code>Go</code> 包中，这使我们可以同时测试 <code>Go</code> 包中可导出和不可导出的标识符。当我们编写的单元测试需要访问 <code>Go</code> 包中不可导出的变量、函数和方法时，就需要编写白盒测试用例。</li>
+<li>将测试和生产代码放在不同的 <code>Go</code> 包中。这时，我们仅可以测试 <code>Go</code> 包的可导出标识符。这意味着我们的测试包将无法访问生产代码中的任何内部函数、变量或常量。</li>
+</ul>
+<p>在白盒测试中，<code>Go</code>
+的测试包名称需要跟被测试的包名保持一致，例如：<code>person.go</code> 定义了一个 <code>person</code> 包，则 <code>person_test.go</code> 的包名也要为person，这也意味着<code>person.go</code> 和 <code>person_test.go</code>
+都要在同一个目录中。</p>
+<p>在黑盒测试中，<code>Go</code> 的测试包名称需要跟被测试的包名不同，但仍然可以存放在同一个目录下。比如，person.go定义了一个 <code>person</code> 包，则 <code>person_test.go</code> 的包名需要跟 <code>person</code>
+不同，通常我们命名为 <code>person_test</code> 。</p>
+<p>如果不是需要使用黑盒测试，我们在做单元测试时要尽量使用白盒测试。一方面，这是 <code>go test</code> 工具的默认行为；另一方面，使用白盒测试，我们可以测试和使用不可导出的标识符。</p>
+<p>测试文件和包的命名规范，由 Go 语言及 <code>go test</code> 工具来强制约束</p>
+<h3 id="33-函数命名规范">3.3 函数命名规范<a hidden class="anchor" aria-hidden="true" href="#33-函数命名规范">#</a></h3>
+<p>享用多个测试用例测试某个函数，比如 <code>strings.Compare</code> ,可以将测试函数命名为 <code>TestCompareXxx</code>, <code>Xxx</code> 代表 <code>Compare</code> 函数的某个场景描述</p>
+<p><code>TestCompare</code>、<code>TestCompareIdenticalString</code>、<code>T</code>estCompareStrings`</p>
+<h3 id="34-变量命名规范">3.4 变量命名规范<a hidden class="anchor" aria-hidden="true" href="#34-变量命名规范">#</a></h3>
+<p>单元测试用例通常会有一个实际的输出，我们会将预期的输出跟实际的输出进行对比，来判断单元测试是否通过。</p>
+<p>实际输出和预期输出采用如下命令： <code>expected/actual</code> ，或者 <code>got/want</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nx">expected</span> <span class="o">!=</span> <span class="nx">actual</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">t</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Expected User-Agent &#39;%s&#39; does not match &#39;%s&#39;&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">expected</span><span class="p">,</span> <span class="nx">actual</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="4-单元测试">4 单元测试<a hidden class="anchor" aria-hidden="true" href="#4-单元测试">#</a></h2>
+<p>单元测试用例函数以 <code>Test</code> 开头，<code>TestXxx</code> 或 <code>Test_xxx</code> （ Xxx 部分为任意字母数字组合，首字母大写），函数参数必须是 <code>*testing.T</code>。
+<code>testing.T</code> 的 <code>Error</code> 、<code>Errorf</code> 、<code>FailNow</code> 、<code>Fatal</code> 、<code>FatalIf</code> 方法，来说明测试不通过；调用 <code>Log</code> 、<code>Logf</code>方法来记录测试信息</p>
+<p><strong>go test</strong></p>
+<p>go test 自动搜集所有格式为*_test.go的测试文件，从中提取全部测试函数并执行.</p>
+<ul>
+<li>-v： 显示测试函数的运行细节</li>
+<li>-run：选择要执行的函数。<code>go test -v -run='TestA.*'</code></li>
+<li>-count=N: 指定测试函数运行的次数，go test -v -run=&lsquo;TestA.*&rsquo; -count=2‘</li>
+</ul>
+<p><strong>测试单个文件</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go <span class="nb">test</span> helloworld_test.go
+</span></span></code></pre></div><h3 id="41-多个输入的测试用例">4.1 多个输入的测试用例<a hidden class="anchor" aria-hidden="true" href="#41-多个输入的测试用例">#</a></h3>
+<p>一个测试用例中，测试不同的输入和输出，也就是不同的测试用例</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestAbs_2</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">x</span>    <span class="kt">float64</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">want</span> <span class="kt">float64</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="o">-</span><span class="mf">3.1</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">tt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">tests</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">got</span> <span class="o">:=</span> <span class="nf">Abs</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span> <span class="nx">got</span> <span class="o">!=</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">t</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Abs() = %f, want %v&#34;</span><span class="p">,</span> <span class="nx">got</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>assert</strong>
+也可以使用 assert 判断测试是否通过</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"> <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">tt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">tests</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">got</span> <span class="o">:=</span> <span class="nf">Abs</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">assert</span><span class="p">.</span><span class="nf">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">got</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>assert 的优势：</p>
+<ul>
+<li>友好的输出结果，易于阅读，代码更简洁</li>
+<li>可以针对每次断言，添加额外的消息说明，例如assert.Equal(t, got, tt.want, &ldquo;Abs test&rdquo;)</li>
+</ul>
+<h2 id="5-自动生成单元测试用例">5 自动生成单元测试用例<a hidden class="anchor" aria-hidden="true" href="#5-自动生成单元测试用例">#</a></h2>
+<p>安装 <code>gotests</code> 命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">go</span> <span class="nx">install</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">cweill</span><span class="o">/</span><span class="nx">gotests</span><span class="o">/...</span>
+</span></span></code></pre></div><p><code>gotests</code> 命令执行格式为：<code>gotests [options] [PATH] [FILE]</code>,可以为指定 PATH下的所有 Go 源码文件中的函数生成测试代码，也可以只为某个FILE中的函数生成测试代码。</p>
+<p>进入测试代码目录，生成测试用例</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gotests -all -w .
+</span></span></code></pre></div><p>生成后的测试用例只需要补齐 TODO 测试变量即可,</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">args</span> <span class="nx">args</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">want</span> <span class="o">*</span><span class="nx">LimitAndOffset</span>
+</span></span><span class="line"><span class="cl"><span class="p">}{</span> 
+</span></span><span class="line"><span class="cl">	<span class="c1">// TODO: Add test cases.   
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="p">}</span>
+</span></span></code></pre></div><p>比如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">args</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">offset</span> <span class="o">*</span><span class="kt">int64</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">limit</span>  <span class="o">*</span><span class="kt">int64</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">args</span> <span class="nx">args</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">want</span> <span class="o">*</span><span class="nx">LimitAndOffset</span>
+</span></span><span class="line"><span class="cl"><span class="p">}{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;both offset and limit are not zero&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">args</span><span class="p">:</span> <span class="nx">args</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">offset</span><span class="p">:</span> <span class="nx">pointer</span><span class="p">.</span><span class="nf">ToInt64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">limit</span><span class="p">:</span>  <span class="nx">pointer</span><span class="p">.</span><span class="nf">ToInt64</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">want</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">LimitAndOffset</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Offset</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Limit</span><span class="p">:</span>  <span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;both offset and limit are zero&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">want</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">LimitAndOffset</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Offset</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Limit</span><span class="p">:</span>  <span class="mi">1000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;offset not zero and limit zero&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">args</span><span class="p">:</span> <span class="nx">args</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="nx">offset</span><span class="p">:</span> <span class="nx">pointer</span><span class="p">.</span><span class="nf">ToInt64</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">want</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">LimitAndOffset</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Offset</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Limit</span><span class="p">:</span>  <span class="mi">1000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;offset zero and limit not zero&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">args</span><span class="p">:</span> <span class="nx">args</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">limit</span><span class="p">:</span> <span class="nx">pointer</span><span class="p">.</span><span class="nf">ToInt64</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">want</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">LimitAndOffset</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Offset</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Limit</span><span class="p">:</span>  <span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="6-性能测试">6 性能测试<a hidden class="anchor" aria-hidden="true" href="#6-性能测试">#</a></h2>
+<ul>
+<li>用例函数必须以 <code>Benchmark</code> 开头，例如 <code>BenchmarkXxx</code> 或 <code>Benchmark_Xxx</code> （ Xxx 部分为任意字母数字组合，首字母大写）。</li>
+<li>函数参数必须是*testing.B，函数内以b.N作为循环次数，其中N会在运行时动态调整，直到性能测试函数可以持续足够长的时间，以便能够可靠地计时。</li>
+</ul>
+<p>示例:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">BenchmarkRandInt</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">RandInt</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>go test</code> 命令默认不会执行性能测试函数,需要配合 <code>-bench &lt;pattern&gt;</code> 才会执行，<code>-bench</code> 后可以跟正则表达式</p>
+<p><code>go test -bench=&quot;.*&quot;</code> 表示执行所有的压力测试函数。<code>go test -bench</code> 只会执行压力测试函数，不会执行普通的测试</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ go <span class="nb">test</span> -bench<span class="o">=</span><span class="s2">&#34;.*&#34;</span>
+</span></span><span class="line"><span class="cl">goos: windows
+</span></span><span class="line"><span class="cl">goarch: amd64
+</span></span><span class="line"><span class="cl">pkg: go-util/pkg/go-test/test
+</span></span><span class="line"><span class="cl">cpu: AMD Ryzen <span class="m">7</span> 5800X 8-Core Processor
+</span></span><span class="line"><span class="cl">BenchmarkRandInt-16     <span class="m">287126193</span>                4.154 ns/op
+</span></span><span class="line"><span class="cl">PASS
+</span></span><span class="line"><span class="cl">ok      go-util/pkg/go-test/test        1.785s
+</span></span></code></pre></div><ul>
+<li>BenchmarkRandInt-4，BenchmarkRandInt表示所测试的测试函数名， 16 表示有 16 个 CPU 线程参与了此次测试，默认是GOMAXPROCS的值。</li>
+<li>287126193 ，说明函数中的循环执行了90848414次。</li>
+<li>4.154 ns/op，说明每次循环的执行平均耗时是 12.8 纳秒，该值越小，说明代码性能越高</li>
+</ul>
+<p><strong>重置测试计数</strong></p>
+<p>性能测试函数在执行循环前，如果要做一些耗时的准备工作，需要重置性能测试时间计数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">BenchmarkBigLen</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">big</span> <span class="o">:=</span> <span class="nf">NewBig</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">b</span><span class="p">.</span><span class="nf">ResetTimer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">big</span><span class="p">.</span><span class="nf">Len</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>也可以先停止再开始</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">BenchmarkBigLen</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">b</span><span class="p">.</span><span class="nf">StopTimer</span><span class="p">()</span> <span class="c1">// 调用该函数停止压力测试的时间计数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">big</span> <span class="o">:=</span> <span class="nf">NewBig</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">b</span><span class="p">.</span><span class="nf">StartTimer</span><span class="p">()</span> <span class="c1">// 重新开始时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">big</span><span class="p">.</span><span class="nf">Len</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="61-性能测试函数参数支持">6.1 性能测试函数参数支持<a hidden class="anchor" aria-hidden="true" href="#61-性能测试函数参数支持">#</a></h3>
+<ul>
+<li>benchmem，输出内存分配统计：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span> <span class="k">go</span> <span class="nx">test</span> <span class="o">-</span><span class="nx">bench</span><span class="p">=</span><span class="s">&#34;.*&#34;</span> <span class="o">-</span><span class="nx">benchmem</span>
+</span></span><span class="line"><span class="cl"><span class="nx">goos</span><span class="p">:</span> <span class="nx">windows</span>
+</span></span><span class="line"><span class="cl"><span class="nx">goarch</span><span class="p">:</span> <span class="nx">amd64</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pkg</span><span class="p">:</span> <span class="k">go</span><span class="o">-</span><span class="nx">util</span><span class="o">/</span><span class="nx">pkg</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">test</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cpu</span><span class="p">:</span> <span class="nx">AMD</span> <span class="nx">Ryzen</span> <span class="mi">7</span> <span class="mi">5800</span><span class="nx">X</span> <span class="mi">8</span><span class="o">-</span><span class="nx">Core</span> <span class="nx">Processor</span>
+</span></span><span class="line"><span class="cl"><span class="nx">BenchmarkRandInt</span><span class="o">-</span><span class="mi">16</span>     <span class="mi">286398368</span>                <span class="mf">4.193</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>           <span class="mi">0</span> <span class="nx">B</span><span class="o">/</span><span class="nx">op</span>          <span class="mi">0</span> <span class="nx">allocs</span><span class="o">/</span><span class="nx">op</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PASS</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ok</span>      <span class="k">go</span><span class="o">-</span><span class="nx">util</span><span class="o">/</span><span class="nx">pkg</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">test</span>        <span class="mf">1.800</span><span class="nx">s</span>
+</span></span></code></pre></div><p>0 B/op  0 B/op，表示每次执行分配了多少内存（字节），该值越小，说明代码内存占用越小。
+0 allocs/op,表示每次执行分配了多少次内存，该值越小，说明分配内存次数越少，意味着代码性能越高。</p>
+<ul>
+<li>benchtime，指定测试时间和循环执行次数（次数格式需要为 Nx，例如 100x,表示100次）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span> <span class="k">go</span> <span class="nx">test</span> <span class="o">-</span><span class="nx">bench</span><span class="p">=</span><span class="s">&#34;.*&#34;</span> <span class="o">-</span><span class="nx">benchtime</span><span class="p">=</span><span class="mi">10</span><span class="nx">s</span>
+</span></span><span class="line"><span class="cl"><span class="nx">goos</span><span class="p">:</span> <span class="nx">windows</span>
+</span></span><span class="line"><span class="cl"><span class="nx">goarch</span><span class="p">:</span> <span class="nx">amd64</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pkg</span><span class="p">:</span> <span class="k">go</span><span class="o">-</span><span class="nx">util</span><span class="o">/</span><span class="nx">pkg</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">test</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cpu</span><span class="p">:</span> <span class="nx">AMD</span> <span class="nx">Ryzen</span> <span class="mi">7</span> <span class="mi">5800</span><span class="nx">X</span> <span class="mi">8</span><span class="o">-</span><span class="nx">Core</span> <span class="nx">Processor</span>
+</span></span><span class="line"><span class="cl"><span class="nx">BenchmarkRandInt</span><span class="o">-</span><span class="mi">16</span>     <span class="mi">1000000000</span>               <span class="mf">4.165</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PASS</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ok</span>      <span class="k">go</span><span class="o">-</span><span class="nx">util</span><span class="o">/</span><span class="nx">pkg</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">test</span>        <span class="mf">4.762</span><span class="nx">s</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 测试次数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="k">go</span> <span class="nx">test</span> <span class="o">-</span><span class="nx">bench</span><span class="p">=</span><span class="s">&#34;.*&#34;</span> <span class="o">-</span><span class="nx">benchtime</span><span class="p">=</span><span class="mi">100</span><span class="nx">x</span>
+</span></span><span class="line"><span class="cl"><span class="nx">goos</span><span class="p">:</span> <span class="nx">windows</span>
+</span></span><span class="line"><span class="cl"><span class="nx">goarch</span><span class="p">:</span> <span class="nx">amd64</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pkg</span><span class="p">:</span> <span class="k">go</span><span class="o">-</span><span class="nx">util</span><span class="o">/</span><span class="nx">pkg</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">test</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cpu</span><span class="p">:</span> <span class="nx">AMD</span> <span class="nx">Ryzen</span> <span class="mi">7</span> <span class="mi">5800</span><span class="nx">X</span> <span class="mi">8</span><span class="o">-</span><span class="nx">Core</span> <span class="nx">Processor</span>
+</span></span><span class="line"><span class="cl"><span class="nx">BenchmarkRandInt</span><span class="o">-</span><span class="mi">16</span>          <span class="mi">100</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PASS</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ok</span>      <span class="k">go</span><span class="o">-</span><span class="nx">util</span><span class="o">/</span><span class="nx">pkg</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">test</span>        <span class="mf">0.166</span><span class="nx">s</span>
+</span></span></code></pre></div><ul>
+<li>cpu，指定 <code>GOMAXPROCS</code>。</li>
+<li>timeout，指定测试函数执行的超时时间</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span> <span class="k">go</span> <span class="nx">test</span> <span class="o">-</span><span class="nx">bench</span><span class="p">=</span><span class="s">&#34;.*&#34;</span> <span class="o">-</span><span class="nx">timeout</span><span class="p">=</span><span class="mi">1</span><span class="nx">s</span> <span class="o">-</span><span class="nx">cpu</span><span class="p">=</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="nx">goos</span><span class="p">:</span> <span class="nx">windows</span>
+</span></span><span class="line"><span class="cl"><span class="nx">goarch</span><span class="p">:</span> <span class="nx">amd64</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pkg</span><span class="p">:</span> <span class="k">go</span><span class="o">-</span><span class="nx">util</span><span class="o">/</span><span class="nx">pkg</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">test</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cpu</span><span class="p">:</span> <span class="nx">AMD</span> <span class="nx">Ryzen</span> <span class="mi">7</span> <span class="mi">5800</span><span class="nx">X</span> <span class="mi">8</span><span class="o">-</span><span class="nx">Core</span> <span class="nx">Processor</span>
+</span></span><span class="line"><span class="cl"><span class="nx">BenchmarkRandInt</span><span class="o">-</span><span class="mi">2</span>      <span class="mi">287756878</span>                <span class="mf">4.165</span> <span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PASS</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ok</span>      <span class="k">go</span><span class="o">-</span><span class="nx">util</span><span class="o">/</span><span class="nx">pkg</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">test</span>        <span class="mf">1.791</span><span class="nx">s</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://hzw9527.github.io/tags/%E6%B5%8B%E8%AF%95/">测试</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://hzw9527.github.io/posts/git/gitignore/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Gitignore</span>
+  </a>
+  <a class="next" href="https://hzw9527.github.io/posts/yaml/yaml/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Yaml基本语法</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_test on twitter"
+        href="https://twitter.com/intent/tweet/?text=Go_test&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_test%2f&amp;hashtags=%e6%b5%8b%e8%af%95">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_test on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_test%2f&amp;title=Go_test&amp;summary=Go_test&amp;source=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_test%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_test on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_test%2f&title=Go_test">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_test on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_test%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_test on whatsapp"
+        href="https://api.whatsapp.com/send?text=Go_test%20-%20https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_test%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Go_test on telegram"
+        href="https://telegram.me/share/url?text=Go_test&amp;url=https%3a%2f%2fhzw9527.github.io%2fposts%2fgo%2fgo_test%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://hzw9527.github.io/">hzw</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

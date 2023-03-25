@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>设计模式 on hzw</title>
+    <link>https://hzw9527.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 设计模式 on hzw</description>
+    <image>
+      <url>https://hzw9527.github.io/papermod-cover.png</url>
+      <link>https://hzw9527.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 04 Dec 2022 16:53:14 +0800</lastBuildDate><atom:link href="https://hzw9527.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>design_pattern</title>
+      <link>https://hzw9527.github.io/posts/go/go_common_design_pattern/</link>
+      <pubDate>Sun, 04 Dec 2022 16:53:14 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/go/go_common_design_pattern/</guid>
+      <description>&lt;p&gt;go 常用的设计模式&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Abstract_factory</title>
+      <link>https://hzw9527.github.io/posts/pattern/abstract_factory/</link>
+      <pubDate>Mon, 06 Jun 2022 21:39:27 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/pattern/abstract_factory/</guid>
+      <description>&lt;p&gt;学习创建型模式-抽象工厂&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Factory_function</title>
+      <link>https://hzw9527.github.io/posts/pattern/factory_function/</link>
+      <pubDate>Mon, 06 Jun 2022 21:37:57 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/pattern/factory_function/</guid>
+      <description>&lt;p&gt;学习创建型模式-工厂函数&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Single_factory</title>
+      <link>https://hzw9527.github.io/posts/pattern/single_factory/</link>
+      <pubDate>Mon, 06 Jun 2022 21:36:34 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/pattern/single_factory/</guid>
+      <description>&lt;p&gt;学习创建型模式-简单工厂模式&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Single</title>
+      <link>https://hzw9527.github.io/posts/pattern/single/</link>
+      <pubDate>Mon, 06 Jun 2022 21:34:07 +0800</pubDate>
+      
+      <guid>https://hzw9527.github.io/posts/pattern/single/</guid>
+      <description>&lt;p&gt;创建型模式-单例模式&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
